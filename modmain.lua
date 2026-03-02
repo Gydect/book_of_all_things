@@ -21,9 +21,9 @@ end
 PrefabFiles = {}
 
 Assets = {
-    -- Asset("ATLAS", "images/tbat_inventoryimages.xml"), -- 物品栏贴图集
-    -- Asset("IMAGE", "images/tbat_inventoryimages.tex"),
-    -- Asset("ATLAS_BUILD", "images/tbat_inventoryimages.xml", 256),
+    Asset("ATLAS", "images/tbat_inventoryimages.xml"), -- 物品栏贴图集
+    Asset("IMAGE", "images/tbat_inventoryimages.tex"),
+    Asset("ATLAS_BUILD", "images/tbat_inventoryimages.xml", 256),
 
     -- Asset("ATLAS", "images/tbat_crafting_menu_icons.xml"), -- 科技栏图标
     -- Asset("IMAGE", "images/tbat_crafting_menu_icons.tex"),
