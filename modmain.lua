@@ -18,15 +18,17 @@ else
 end
 
 -- ※万物皆是prefab
-PrefabFiles = {}
+PrefabFiles = {
+    "tbat_adventurers_notes", -- 冒险家笔记
+}
 
 Assets = {
     Asset("ATLAS", "images/tbat_inventoryimages.xml"), -- 物品栏贴图集
     Asset("IMAGE", "images/tbat_inventoryimages.tex"),
     Asset("ATLAS_BUILD", "images/tbat_inventoryimages.xml", 256),
 
-    -- Asset("ATLAS", "images/tbat_crafting_menu_icons.xml"), -- 科技栏图标
-    -- Asset("IMAGE", "images/tbat_crafting_menu_icons.tex"),
+    Asset("ATLAS", "images/tbat_ui.xml"), -- UI图标
+    Asset("IMAGE", "images/tbat_ui.tex"),
 
     -- Asset("ATLAS", "minimap/tbat_minimap.xml"), -- 小地图贴图集
     -- Asset("IMAGE", "minimap/tbat_minimap.tex"),
@@ -37,7 +39,7 @@ Assets = {
 
 -- 注册贴图集
 modimport("scripts/tbat_tool.lua") -- 工具
--- TBAT_TOOL.Tool_RegisterInventoryItemAtlas("images/tbat_inventoryimages.xml")
+TBAT_TOOL.Tool_RegisterInventoryItemAtlas("images/tbat_inventoryimages.xml")
 
 -- 注册小地图图标
 -- AddMinimapAtlas("minimap/tbat_minimap.xml")
@@ -49,4 +51,6 @@ modimport("scripts/tbat_linkmod.lua")
 -- modimport("scripts/tbat_globalfn.lua")
 
 -- 资源文件导入
--- modimport("scripts/tbat_xxx.lua")
+modimport("scripts/tbat_ui.lua")     -- UI相关
+modimport("scripts/tbat_sg.lua")     -- 人物状态表相关
+modimport("scripts/tbat_action.lua") -- 动作
