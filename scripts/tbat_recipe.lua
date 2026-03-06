@@ -5,7 +5,7 @@ AddRecipe2(
     TECH.SCIENCE_TWO,
     {
         placer = "tbat_spirit_pool_placer", -- 建造预览
-        min_spacing = 1,                    -- 放置间隔
+        min_spacing = 0,                    -- 放置间隔
     },
     {
         "STRUCTURES", -- 建筑分类

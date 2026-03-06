@@ -28,11 +28,16 @@ Assets = {
     Asset("IMAGE", "images/tbat_inventoryimages.tex"),
     Asset("ATLAS_BUILD", "images/tbat_inventoryimages.xml", 256),
 
-    Asset("ATLAS", "images/tbat_ui.xml"), -- UI图标
+    Asset("ATLAS", "images/tbat_ui.xml"), -- UI图集
     Asset("IMAGE", "images/tbat_ui.tex"),
+
+    Asset("ATLAS", "images/tbat_hud.xml"), -- HUD图集
+    Asset("IMAGE", "images/tbat_hud.tex"),
 
     Asset("ATLAS", "minimap/tbat_minimap.xml"), -- 小地图贴图集
     Asset("IMAGE", "minimap/tbat_minimap.tex"),
+
+    Asset("ANIM", "anim/ui_tbat_spirit_pool_3x3.zip"), -- 幻灵水池UI动画
 }
 
 -- 注册可复制组件
@@ -52,10 +57,11 @@ modimport("scripts/tbat_linkmod.lua")
 -- modimport("scripts/tbat_globalfn.lua")
 
 -- 资源文件导入
-modimport("scripts/tbat_ui.lua")     -- UI相关
-modimport("scripts/tbat_sg.lua")     -- 人物状态表相关
-modimport("scripts/tbat_action.lua") -- 动作
-modimport("scripts/tbat_hook.lua")   -- 本mod钩子
-modimport("scripts/tbat_recipe.lua") -- 配方相关
+modimport("scripts/tbat_ui.lua")         -- UI相关
+modimport("scripts/tbat_sg.lua")         -- 人物状态表相关
+modimport("scripts/tbat_action.lua")     -- 动作
+modimport("scripts/tbat_hook.lua")       -- 本mod钩子
+modimport("scripts/tbat_recipe.lua")     -- 配方相关
+modimport("scripts/tbat_containers.lua") -- 容器相关
 
 -- require("tbat_debugcommands")        -- 调试用指令

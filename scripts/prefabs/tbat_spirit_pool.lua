@@ -27,7 +27,7 @@ local function commonfn()
     inst.entity:AddMiniMapEntity()
     inst.entity:AddNetwork()
 
-    MakePondPhysics(inst, 1.95)
+    -- MakePondPhysics(inst, 1.95)
 
     inst.AnimState:SetBuild("tbat_spirit_pool")
     inst.AnimState:SetBank("tbat_spirit_pool")
@@ -42,7 +42,7 @@ local function commonfn()
 
     inst.no_wet_prefix = true               -- 没有潮湿的前缀
 
-    inst:SetDeploySmartRadius(2)
+    -- inst:SetDeploySmartRadius(2)
 
     inst.entity:SetPristine()
 
@@ -51,6 +51,12 @@ local function commonfn()
     end
 
     inst:AddComponent("inspectable")
+
+    inst:AddComponent("container")
+    inst.components.container:WidgetSetup("tbat_spirit_pool")
+
+    inst:AddComponent("preserver")
+    inst.components.preserver:SetPerishRateMultiplier(TUNING.FISH_BOX_PRESERVER_RATE)
 
     -- inst:AddComponent("fishable")
 
