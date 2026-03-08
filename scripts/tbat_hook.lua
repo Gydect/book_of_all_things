@@ -111,9 +111,9 @@ end
 
 -- 这样多人钓鱼的时候应该不会彼此覆盖吧,有待实装验证
 function FishingRod:Hook(...)
-    self.target.fisherman = self.fisherman
-    self.target.fishingrod = self.inst.prefab
+    self.target.tbat_fisherman = self.fisherman
+    self.target.tbat_fishingrod = self.inst.prefab
     _Hook(self, ...)
-    self.target.fisherman = nil
-    self.target.fishingrod = nil
+    self.target.tbat_fisherman = nil
+    self.target.tbat_fishingrod = nil
 end

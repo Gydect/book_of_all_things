@@ -21,16 +21,16 @@ end
 local function GetFishFn(inst)
     local container = inst.components.container
     if container == nil then
+        return "weregoose_splash_med2" -- 钓上去一个特效，哈哈
+    end
+
+    if inst.tbat_fishingrod == nil and inst.tbat_fisherman == nil then
         return "weregoose_splash_med2"
     end
 
-    if inst.fishingrod == nil and inst.fisherman == nil then
-        return "weregoose_splash_med2"
-    end
-
-    if inst.fishingrod ~= "tbat_eq_fantasy_tool" then
-        if inst.fisherman.components.talker then
-            inst.fisherman:DoTaskInTime(20 * FRAMES, function(fisherman)
+    if inst.tbat_fishingrod ~= "tbat_eq_fantasy_tool" then
+        if inst.tbat_fisherman.components.talker then
+            inst.tbat_fisherman:DoTaskInTime(20 * FRAMES, function(fisherman)
                 fisherman.components.talker:Say("我大概需要一个美貌与实用并存的工具")
             end)
         end
@@ -39,8 +39,8 @@ local function GetFishFn(inst)
 
     local bait = container:GetItemInSlot(5)
     if bait == nil then
-        if inst.fisherman.components.talker then
-            inst.fisherman:DoTaskInTime(20 * FRAMES, function(fisherman)
+        if inst.tbat_fisherman.components.talker then
+            inst.tbat_fisherman:DoTaskInTime(20 * FRAMES, function(fisherman)
                 fisherman.components.talker:Say("没有诱饵，我不是姜太公")
             end)
         end
@@ -52,8 +52,8 @@ local function GetFishFn(inst)
     local fishitem = container:GetItemInSlot(slot)
 
     if fishitem == nil then
-        if inst.fisherman.components.talker then
-            inst.fisherman:DoTaskInTime(20 * FRAMES, function(fisherman)
+        if inst.tbat_fisherman.components.talker then
+            inst.tbat_fisherman:DoTaskInTime(20 * FRAMES, function(fisherman)
                 fisherman.components.talker:Say("没有饲养鱼或饲养鱼太少")
             end)
         end

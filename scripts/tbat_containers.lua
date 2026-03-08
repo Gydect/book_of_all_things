@@ -48,8 +48,8 @@ params.tbat_spirit_pool =
 
 function params.tbat_spirit_pool.itemtestfn(container, item, slot)
     return (slot ~= 5 and (item:HasTag("smalloceancreature") or item:HasTag("fish"))) or
-        (slot == 5 and item:HasTag("oceanfishing_lure")) or
-        (slot == nil and (item:HasTag("smalloceancreature") or item:HasTag("oceanfishing_lure") or item:HasTag("fish")))
+        (slot == 5 and item:HasTag("tbat_reef_conch")) or
+        (slot == nil and (item:HasTag("smalloceancreature") or item:HasTag("tbat_reef_conch") or item:HasTag("fish")))
 end
 
 -- ================================
