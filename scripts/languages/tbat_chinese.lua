@@ -18,3 +18,11 @@ STRINGS.TBAT_ACTIONS = {}
 STRINGS.TBAT_ACTIONS.TBAT_READ = {
     GENERIC = "阅读",
 }
+
+STRINGS.TBAT_ACTIONS.TBAT_SALVAGE = {
+    GENERIC = "打捞",
+    ACTIONFAIL = {
+        NO_FISH = "好像还没有养鱼呢",
+        NO_BAIT = "没有吃饱的小鱼，我也不能吃",
+    },
+}

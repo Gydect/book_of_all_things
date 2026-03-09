@@ -72,6 +72,95 @@ local function GetFishFn(inst)
     return fishitem.prefab
 end
 
+local function getstacksize(item)
+    if item == nil then
+        return 0
+    end
+
+    return item.components.stackable ~= nil and item.components.stackable:StackSize() or 1
+end
+
+local function SalvageFn(inst, doer)
+    local container = inst.components.container
+    local inventory = doer.components.inventory or nil
+    if container == nil or inventory == nil then
+        return false
+    end
+
+    local fishslots = { 1, 2, 3, 4, 6, 7, 8, 9 }
+    local speciesmap = {}  -- 品种映射表
+    local specieslist = {} -- 品种列表
+
+    for _, slot in ipairs(fishslots) do
+        local fish = container:GetItemInSlot(slot)
+        if fish ~= nil then
+            local species = speciesmap[fish.prefab]
+            if species == nil then
+                species = { prefab = fish.prefab }
+                speciesmap[fish.prefab] = species
+                table.insert(specieslist, species)
+            end
+        end
+    end
+
+    if #specieslist <= 0 then
+        return false, "NO_FISH"
+    end
+
+    local bait = container:GetItemInSlot(5)
+    if bait == nil then
+        return false, "NO_BAIT"
+    end
+
+    local salvagecount = math.min(5, #specieslist) -- 打捞数量,最多5种
+    local baitcost = salvagecount * 2
+    -- 饵料不足
+    if getstacksize(bait) < baitcost then
+        return false, "NO_BAIT"
+    end
+
+    -- 品种大于最多打捞数量时随机排序品种列表,保证每种品种被打捞的概率相同
+    if #specieslist > salvagecount then
+        for i = #specieslist, 2, -1 do
+            local j = math.random(i)
+            specieslist[i], specieslist[j] = specieslist[j], specieslist[i]
+        end
+    end
+
+    local actualcount = 0
+    for i = 1, salvagecount do
+        local species = specieslist[i]
+        local reward = SpawnPrefab(species.prefab)
+
+        if reward ~= nil then
+            inventory:GiveItem(reward, nil, inst:GetPosition())
+            actualcount = actualcount + 1
+        end
+    end
+
+    if actualcount <= 0 then
+        return false, "NO_FISH"
+    end
+
+    baitcost = actualcount * 2
+    bait = container:GetItemInSlot(5)
+    if bait ~= nil then
+        if bait.components.stackable ~= nil and bait.components.stackable:StackSize() > baitcost then
+            local consumed = bait.components.stackable:Get(baitcost)
+            if consumed ~= nil then
+                consumed:Remove()
+            end
+        else
+            local consumed = container:RemoveItem(bait, false)
+            if consumed ~= nil then
+                consumed:Remove()
+            end
+        end
+    end
+
+    return true
+end
+
 local function commonfn()
     local inst = CreateEntity()
 
@@ -95,6 +184,7 @@ local function commonfn()
     inst:AddTag("pond")
     inst:AddTag("antlion_sinkhole_blocker") -- 不受蚁狮地震影响
     inst:AddTag("birdblocker")              -- 鸟不会停留在池塘上
+    inst:AddTag("tbat_pool")                -- 幻灵水池标签
 
     inst.no_wet_prefix = true               -- 没有潮湿的前缀
 
@@ -127,6 +217,9 @@ local function commonfn()
     inst.components.hauntable:SetHauntValue(TUNING.HAUNT_TINY)
 
     inst:AddComponent("watersource")
+
+    inst:AddComponent("tbat_pool") -- 幻灵水池打捞组件
+    inst.components.tbat_pool:SetSalvageFn(SalvageFn)
 
     return inst
 end

@@ -16,6 +16,23 @@ local actions = {
                     return true
                 end
             end
+            return false
+        end,
+    },
+    TBAT_SALVAGE = {
+        id = "TBAT_SALVAGE",
+        priority = 6,
+        strfn = function(act)
+            return "GENERIC"
+        end,
+        fn = function(act)
+            local targ = act.target
+            if targ ~= nil and act.doer ~= nil then
+                if targ.components.tbat_pool ~= nil then
+                    return targ.components.tbat_pool:Salvage(act.doer)
+                end
+            end
+            return false
         end,
     },
 }
@@ -35,6 +52,8 @@ actions = nil -- 释放资源
 -- =======================================
 AddStategraphActionHandler("wilson", ActionHandler(ACTIONS.TBAT_READ, "reading_tbat_adventurers_notes"))
 AddStategraphActionHandler("wilson_client", ActionHandler(ACTIONS.TBAT_READ, "reading_tbat_adventurers_notes"))
+AddStategraphActionHandler("wilson", ActionHandler(ACTIONS.TBAT_SALVAGE, "dolongaction"))
+AddStategraphActionHandler("wilson_client", ActionHandler(ACTIONS.TBAT_SALVAGE, "dolongaction"))
 
 -- =======================================
 -- [[ ADD COMPONENT ACTION ]]
@@ -51,8 +70,21 @@ AddComponentAction("INVENTORY", "inventoryitem", function(inst, doer, _actions, 
         table.insert(_actions, ACTIONS.TBAT_READ)
     end
 end)
+AddComponentAction("SCENE", "tbat_pool", function(inst, doer, _actions, right)
+    if inst:HasTag("tbat_pool") and right then
+        table.insert(_actions, ACTIONS.TBAT_SALVAGE)
+    end
+end)
 
 -- 先创建动作再命名
 STRINGS.ACTIONS.TBAT_READ = {
     GENERIC = STRINGS.TBAT_ACTIONS.TBAT_READ.GENERIC,
+}
+
+STRINGS.ACTIONS.TBAT_SALVAGE = {
+    GENERIC = STRINGS.TBAT_ACTIONS.TBAT_SALVAGE.GENERIC,
+}
+STRINGS.CHARACTERS.GENERIC.ACTIONFAIL.TBAT_SALVAGE = {
+    NO_FISH = STRINGS.TBAT_ACTIONS.TBAT_SALVAGE.ACTIONFAIL.NO_FISH,
+    NO_BAIT = STRINGS.TBAT_ACTIONS.TBAT_SALVAGE.ACTIONFAIL.NO_BAIT,
 }

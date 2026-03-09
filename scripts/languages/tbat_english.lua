@@ -1,0 +1,28 @@
+-- 物品
+for i = 1, 39 do
+    STRINGS.NAMES["TBAT_ITEM_NOTES_OF_ADVENTURER_" .. i] = "冒险家笔记" .. "·" .. i
+    STRINGS.CHARACTERS.GENERIC.DESCRIBE["TBAT_ITEM_NOTES_OF_ADVENTURER_" .. i] = "这是谁留下的？也许应该问问那只绿色的大鸟。"
+end
+
+STRINGS.NAMES.TBAT_REEF_CONCH = "礁石海螺"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.TBAT_REEF_CONCH = "每一次开合，皆是礁石与海的呼吸"
+
+-- 建筑
+STRINGS.NAMES.TBAT_SPIRIT_POOL = "幻灵水池"
+STRINGS.RECIPE_DESC.TBAT_SPIRIT_POOL = "每一颗水珠里，蜷着未启封的潮汐"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.TBAT_SPIRIT_POOL = "水镜低语时，掌心盛满游动的晴空"
+
+-- 动作
+STRINGS.TBAT_ACTIONS = {}
+
+STRINGS.TBAT_ACTIONS.TBAT_READ = {
+    GENERIC = "阅读",
+}
+
+STRINGS.TBAT_ACTIONS.TBAT_SALVAGE = {
+    GENERIC = "打捞",
+    ACTIONFAIL = {
+        NO_FISH = "好像还没有养鱼呢",
+        NO_BAIT = "没有吃饱的小鱼，我也不能吃",
+    },
+}
