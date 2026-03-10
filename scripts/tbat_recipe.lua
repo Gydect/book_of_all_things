@@ -26,3 +26,16 @@ AddRecipe2(
         "STRUCTURES",
     }
 )
+
+-- 小径石板
+AddRecipe2(
+    "tbat_pathway_slab_item",
+    { Ingredient("goldnugget", 1) },
+    TECH.SCIENCE_TWO,
+    {
+        numtogive = 6,
+    },
+    {
+        "DECOR",
+    }
+)

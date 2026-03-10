@@ -19,10 +19,12 @@ end
 
 -- ※万物皆是prefab
 PrefabFiles = {
+    "tbat_free_skins",           -- 免费皮肤
     "tbat_adventurers_notes",    -- 冒险家笔记
     "tbat_spirit_pool",          -- 幻灵水池
     "tbat_reef_conch",           -- 礁石海螺
     "tbat_meadow_rocking_chair", -- 绿野摇摇椅
+    "tbat_pathway_slab",         -- 小径石板
 }
 
 Assets = {
@@ -66,5 +68,6 @@ modimport("scripts/tbat_hook.lua")       -- 本mod钩子
 modimport("scripts/tbat_recipe.lua")     -- 配方相关
 modimport("scripts/tbat_containers.lua") -- 容器相关
 modimport("scripts/tbat_cooking.lua")    -- 烹饪相关
+modimport("scripts/tbat_skinapi.lua")    -- 风铃的皮肤API
 
 -- require("tbat_debugcommands")        -- 调试用指令
