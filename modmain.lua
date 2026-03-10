@@ -61,13 +61,17 @@ modimport("scripts/tbat_linkmod.lua")
 -- modimport("scripts/tbat_globalfn.lua")
 
 -- 资源文件导入
-modimport("scripts/tbat_ui.lua")         -- UI相关
-modimport("scripts/tbat_sg.lua")         -- 人物状态表相关
-modimport("scripts/tbat_action.lua")     -- 动作
-modimport("scripts/tbat_hook.lua")       -- 本mod钩子
-modimport("scripts/tbat_recipe.lua")     -- 配方相关
-modimport("scripts/tbat_containers.lua") -- 容器相关
-modimport("scripts/tbat_cooking.lua")    -- 烹饪相关
-modimport("scripts/tbat_skinapi.lua")    -- 风铃的皮肤API
+modimport("scripts/tbat_ui.lua")             -- UI相关
+modimport("scripts/tbat_sg.lua")             -- 人物状态表相关
+modimport("scripts/tbat_action.lua")         -- 动作
+modimport("scripts/tbat_hook.lua")           -- 本mod钩子
+if GLOBAL.BOOKOFEVERYTHING_SETS.ENABLEDMODS["old_tbat"] then
+    modimport("scripts/tbat_recipe_old.lua") -- 旧版新版一起开
+else
+    modimport("scripts/tbat_recipe.lua")     -- 单开测试
+end
+modimport("scripts/tbat_containers.lua")     -- 容器相关
+modimport("scripts/tbat_cooking.lua")        -- 烹饪相关
+modimport("scripts/tbat_skinapi.lua")        -- 风铃的皮肤API
 
 -- require("tbat_debugcommands")        -- 调试用指令

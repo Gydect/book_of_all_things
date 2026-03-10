@@ -21,3 +21,4 @@ local function IsModEnable(name)
 end
 
 _G.BOOKOFEVERYTHING_SETS.ENABLEDMODS["legion"] = IsModEnable("Legion") or IsModEnable("棱镜") -- 棱镜
+_G.BOOKOFEVERYTHING_SETS.ENABLEDMODS["old_tbat"] = IsModEnable("幻想世界") -- 旧版万物书
