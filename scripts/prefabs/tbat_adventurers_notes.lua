@@ -44,6 +44,7 @@ local function makenote(index)
         end
 
         inst:AddTag("tbat_note")
+        inst:AddTag("tbat_item_notes_of_adventurer")
 
         inst.entity:SetPristine()
 
@@ -53,6 +54,7 @@ local function makenote(index)
 
         -----------------------------------
 
+        inst.index = index
         inst._number:set(index) -- 笔记的编号
 
         inst:AddComponent("inspectable")
@@ -70,6 +72,8 @@ local function makenote(index)
         -- 可以当燃料但不能被引燃
         inst:AddComponent("fuel")
         inst.components.fuel.fuelvalue = TUNING.MED_FUEL
+
+        inst:AddComponent("erasablepaper") -- 可以被制图桌擦除
 
         MakeHauntableLaunch(inst)
 
