@@ -45,3 +45,29 @@ AddRecipe2(
         "TBAT_RECIPE_FILTER_DECORATION",
     }
 )
+
+-- 暖蔷篱笆栅栏
+AddRecipe2(
+    "tbat_cozy_rosebush_fence_item",
+    { Ingredient("tbat_material_miragewood", 2), Ingredient("tbat_food_pear_blossom_petals", 2) },
+    TECH.TBAT_THE_TREE_OF_ALL_THINGS_ONE,
+    {
+        numtogive = 4,
+    },
+    {
+        "TBAT_RECIPE_FILTER_DECORATION",
+    }
+)
+
+-- 玫瑰木架栅栏
+AddRecipe2(
+    "tbat_rose_trellis_fence_item",
+    { Ingredient("tbat_material_miragewood", 2), Ingredient("tbat_food_valorbush", 2) },
+    TECH.TBAT_THE_TREE_OF_ALL_THINGS_ONE,
+    {
+        numtogive = 4,
+    },
+    {
+        "TBAT_RECIPE_FILTER_DECORATION",
+    }
+)

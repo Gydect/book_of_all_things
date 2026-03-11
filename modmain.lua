@@ -25,6 +25,7 @@ PrefabFiles = {
     "tbat_reef_conch",           -- 礁石海螺
     "tbat_meadow_rocking_chair", -- 绿野摇摇椅
     "tbat_pathway_slab",         -- 小径石板
+    "tbat_fence",                -- 栅栏
 }
 
 Assets = {

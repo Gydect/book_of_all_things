@@ -39,3 +39,29 @@ AddRecipe2(
         "DECOR",
     }
 )
+
+-- 暖蔷篱笆栅栏
+AddRecipe2(
+    "tbat_cozy_rosebush_fence_item",
+    { Ingredient("goldnugget", 1) },
+    TECH.SCIENCE_TWO,
+    {
+        numtogive = 4,
+    },
+    {
+        "STRUCTURES",
+    }
+)
+
+-- 玫瑰木架栅栏
+AddRecipe2(
+    "tbat_rose_trellis_fence_item",
+    { Ingredient("goldnugget", 1) },
+    TECH.SCIENCE_TWO,
+    {
+        numtogive = 4,
+    },
+    {
+        "STRUCTURES",
+    }
+)
