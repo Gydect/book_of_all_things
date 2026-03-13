@@ -94,3 +94,19 @@ AddRecipe2(
         "STRUCTURES",
     }
 )
+
+-- 小浣熊木牌
+AddRecipe2(
+    "tbat_raccoon_sign",
+    {
+        Ingredient("goldnugget", 1),
+    },
+    TECH.SCIENCE_TWO,
+    {
+        placer = "tbat_raccoon_sign_placer",
+        min_spacing = 0,
+    },
+    {
+        "STRUCTURES",
+    }
+)

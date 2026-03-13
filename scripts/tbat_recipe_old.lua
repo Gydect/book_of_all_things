@@ -103,3 +103,19 @@ AddRecipe2(
         "TBAT_RECIPE_FILTER_DECORATION",
     }
 )
+
+-- 小浣熊木牌
+AddRecipe2(
+    "tbat_raccoon_sign",
+    {
+        Ingredient("tbat_material_miragewood", 6),
+    },
+    TECH.TBAT_THE_TREE_OF_ALL_THINGS_ONE,
+    {
+        placer = "tbat_raccoon_sign_placer",
+        min_spacing = 0,
+    },
+    {
+        "TBAT_RECIPE_FILTER_DECORATION",
+    }
+)

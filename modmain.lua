@@ -28,6 +28,7 @@ PrefabFiles = {
     "tbat_fence",                         -- 栅栏
     "tbat_dreamweaver_peachcloud_tree",   -- 织梦桃云树
     "tbat_moonlit_memory_crystal_spring", -- 月光记忆晶泉
+    "tbat_raccoon_sign",                  -- 小浣熊木牌
 }
 
 Assets = {
@@ -44,7 +45,8 @@ Assets = {
     Asset("ATLAS", "minimap/tbat_minimap.xml"), -- 小地图贴图集
     Asset("IMAGE", "minimap/tbat_minimap.tex"),
 
-    Asset("ANIM", "anim/ui_tbat_spirit_pool_3x3.zip"), -- 幻灵水池UI动画
+    Asset("ANIM", "anim/ui_tbat_spirit_pool_3x3.zip"),   -- 幻灵水池UI动画
+    Asset("ANIM", "anim/tbat_raccoon_sign_content.zip"), -- 小浣熊木牌内容动画
 }
 
 -- 注册可复制组件

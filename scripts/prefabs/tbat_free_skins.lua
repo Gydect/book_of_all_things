@@ -35,8 +35,8 @@ BOOKOFALLTHINGS.MakeItemSkin(
         },
     }
 )
-SHADOWWOVEN.MakeItemSkinDefaultImage("tbat_pathway_slab_item", "images/tbat_inventoryimages.xml", "tbat_pathway_slab_item")
-SHADOWWOVEN.MakeItemSkin(
+BOOKOFALLTHINGS.MakeItemSkinDefaultImage("tbat_pathway_slab_item", "images/tbat_inventoryimages.xml", "tbat_pathway_slab_item")
+BOOKOFALLTHINGS.MakeItemSkin(
     "tbat_pathway_slab_item",
     "tbat_pathway_slab_item_skin1",
     {
@@ -83,8 +83,8 @@ BOOKOFALLTHINGS.MakeItemSkin(
         },
     }
 )
-SHADOWWOVEN.MakeItemSkinDefaultImage("tbat_pathway_slab_item", "images/tbat_inventoryimages.xml", "tbat_pathway_slab_item")
-SHADOWWOVEN.MakeItemSkin(
+BOOKOFALLTHINGS.MakeItemSkinDefaultImage("tbat_pathway_slab_item", "images/tbat_inventoryimages.xml", "tbat_pathway_slab_item")
+BOOKOFALLTHINGS.MakeItemSkin(
     "tbat_pathway_slab_item",
     "tbat_pathway_slab_item_skin2",
     {
@@ -131,8 +131,8 @@ BOOKOFALLTHINGS.MakeItemSkin(
         },
     }
 )
-SHADOWWOVEN.MakeItemSkinDefaultImage("tbat_pathway_slab_item", "images/tbat_inventoryimages.xml", "tbat_pathway_slab_item")
-SHADOWWOVEN.MakeItemSkin(
+BOOKOFALLTHINGS.MakeItemSkinDefaultImage("tbat_pathway_slab_item", "images/tbat_inventoryimages.xml", "tbat_pathway_slab_item")
+BOOKOFALLTHINGS.MakeItemSkin(
     "tbat_pathway_slab_item",
     "tbat_pathway_slab_item_skin3",
     {
@@ -158,3 +158,36 @@ SHADOWWOVEN.MakeItemSkin(
         end,
     }
 )
+
+local skins = {
+    "town",
+    "street",
+    "kitchen",
+    "home",
+    "restaurant",
+}
+
+for i, v in ipairs(skins) do
+    BOOKOFALLTHINGS.MakeItemSkinDefaultImage("tbat_raccoon_sign", "images/tbat_inventoryimages.xml", "tbat_raccoon_sign")
+    BOOKOFALLTHINGS.MakeItemSkin(
+        "tbat_raccoon_sign",
+        "tbat_raccoon_sign_" .. v,
+        {
+            name = STRINGS.TBAT_STRINGS["TBAT_RACCOON_SIGN_" .. string.upper(v) .. "_NAME"],
+            des = "None",
+            rarity = "Complimentary",
+            atlas = "images/tbat_inventoryimages.xml",
+            image = "tbat_raccoon_sign_" .. v,
+            build = "tbat_raccoon_sign",
+            bank = "tbat_raccoon_sign",
+            basebuild = "tbat_raccoon_sign",
+            basebank = "tbat_raccoon_sign",
+            init_fn = function(inst, skinname)
+                inst.AnimState:OverrideSymbol("content", "tbat_raccoon_sign_content", v)
+            end,
+            clear_fn = function(inst, skinname)
+                inst.AnimState:OverrideSymbol("content", "tbat_raccoon_sign_content", "default")
+            end,
+        }
+    )
+end
