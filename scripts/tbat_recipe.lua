@@ -142,3 +142,18 @@ AddRecipe2(
         "STRUCTURES",
     }
 )
+
+-- 绿野森林地皮
+AddRecipe2(
+    "turf_tbat_forest",
+    {
+        Ingredient("goldnugget", 1),
+    },
+    TECH.SCIENCE_TWO,
+    {
+        numtogive = 8,
+    },
+    {
+        "DECOR",
+    }
+)

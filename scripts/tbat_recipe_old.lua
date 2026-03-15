@@ -151,3 +151,18 @@ AddRecipe2(
         "TBAT_RECIPE_FILTER_DECORATION",
     }
 )
+
+-- 绿野森林地皮
+AddRecipe2(
+    "turf_tbat_forest",
+    {
+        Ingredient("tbat_material_memory_crystal", 6),
+    },
+    TECH.TBAT_THE_TREE_OF_ALL_THINGS_ONE,
+    {
+        numtogive = 8,
+    },
+    {
+        "TBAT_RECIPE_FILTER_DECORATION",
+    }
+)
