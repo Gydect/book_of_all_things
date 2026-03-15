@@ -81,5 +81,6 @@ end
 modimport("scripts/tbat_containers.lua")     -- 容器相关
 modimport("scripts/tbat_cooking.lua")        -- 烹饪相关
 modimport("scripts/tbat_skinapi.lua")        -- 风铃的皮肤API
+modimport("scripts/tbat_tiledefs.lua")       -- 本mod定义
 
 -- require("tbat_debugcommands")        -- 调试用指令
