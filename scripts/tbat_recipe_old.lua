@@ -104,22 +104,6 @@ AddRecipe2(
     }
 )
 
--- 小浣熊木牌
-AddRecipe2(
-    "tbat_raccoon_sign",
-    {
-        Ingredient("tbat_material_miragewood", 6),
-    },
-    TECH.TBAT_THE_TREE_OF_ALL_THINGS_ONE,
-    {
-        placer = "tbat_raccoon_sign_placer",
-        min_spacing = 0,
-    },
-    {
-        "TBAT_RECIPE_FILTER_DECORATION",
-    }
-)
-
 -- 晓光玫瑰藤蔓
 AddRecipe2(
     "tbat_vine_rose",
@@ -152,11 +136,60 @@ AddRecipe2(
     }
 )
 
+-- 浮梦落雪地皮
+AddRecipe2(
+    "turf_tbat_snowfall",
+    {
+        Ingredient("tbat_material_wish_token", 1),
+        Ingredient("tbat_food_pear_blossom_petals", 2),
+    },
+    TECH.TBAT_THE_TREE_OF_ALL_THINGS_ONE,
+    {
+        numtogive = 8,
+    },
+    {
+        "TBAT_RECIPE_FILTER_DECORATION",
+    }
+)
+
+-- 幻彩云间地皮
+AddRecipe2(
+    "turf_tbat_cloud",
+    {
+        Ingredient("tbat_material_dandelion_umbrella", 1),
+        Ingredient("tbat_material_dandycat", 2),
+    },
+    TECH.TBAT_THE_TREE_OF_ALL_THINGS_ONE,
+    {
+        numtogive = 8,
+    },
+    {
+        "TBAT_RECIPE_FILTER_DECORATION",
+    }
+)
+
+-- 灵蝶幻境地皮
+AddRecipe2(
+    "turf_tbat_psylocke",
+    {
+        Ingredient("tbat_animal_ephemeral_butterfly", 1),
+        Ingredient("tbat_food_cherry_blossom_petals", 2),
+    },
+    TECH.TBAT_THE_TREE_OF_ALL_THINGS_ONE,
+    {
+        numtogive = 8,
+    },
+    {
+        "TBAT_RECIPE_FILTER_DECORATION",
+    }
+)
+
 -- 绿野森林地皮
 AddRecipe2(
     "turf_tbat_forest",
     {
-        Ingredient("tbat_material_memory_crystal", 6),
+        Ingredient("tbat_plant_dandycat_kit", 1),
+        Ingredient("tbat_food_lavender_flower_spike", 2),
     },
     TECH.TBAT_THE_TREE_OF_ALL_THINGS_ONE,
     {

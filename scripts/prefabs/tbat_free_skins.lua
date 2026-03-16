@@ -159,40 +159,6 @@ BOOKOFALLTHINGS.MakeItemSkin(
     }
 )
 
--- 小浣熊木牌-5款免费皮肤
-local sign_skins = {
-    "town",
-    "street",
-    "kitchen",
-    "home",
-    "restaurant",
-}
-
-for i, v in ipairs(sign_skins) do
-    BOOKOFALLTHINGS.MakeItemSkinDefaultImage("tbat_raccoon_sign", "images/tbat_inventoryimages.xml", "tbat_raccoon_sign")
-    BOOKOFALLTHINGS.MakeItemSkin(
-        "tbat_raccoon_sign",
-        "tbat_raccoon_sign_" .. v,
-        {
-            name = STRINGS.TBAT_STRINGS["TBAT_RACCOON_SIGN_" .. string.upper(v) .. "_NAME"],
-            des = "None",
-            rarity = "Complimentary",
-            atlas = "images/tbat_inventoryimages.xml",
-            image = "tbat_raccoon_sign_" .. v,
-            build = "tbat_raccoon_sign",
-            bank = "tbat_raccoon_sign",
-            basebuild = "tbat_raccoon_sign",
-            basebank = "tbat_raccoon_sign",
-            init_fn = function(inst, skinname)
-                inst.AnimState:OverrideSymbol("content", "tbat_raccoon_sign_content", v)
-            end,
-            clear_fn = function(inst, skinname)
-                inst.AnimState:OverrideSymbol("content", "tbat_raccoon_sign_content", "default")
-            end,
-        }
-    )
-end
-
 -- 晓光玫瑰藤蔓-7款免费皮肤
 local vine_skins = {
     "osmanthus",

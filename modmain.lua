@@ -29,7 +29,6 @@ PrefabFiles = {
     "tbat_fence",                         -- 栅栏
     "tbat_dreamweaver_peachcloud_tree",   -- 织梦桃云树
     "tbat_moonlit_memory_crystal_spring", -- 月光记忆晶泉
-    "tbat_raccoon_sign",                  -- 小浣熊木牌
     "tbat_vine_rose",                     -- 晓光玫瑰藤蔓
     "tbat_dreamsea_coral",                -- 幻海珊瑚
 }
@@ -49,7 +48,6 @@ Assets = {
     Asset("IMAGE", "minimap/tbat_minimap.tex"),
 
     Asset("ANIM", "anim/ui_tbat_spirit_pool_3x3.zip"),   -- 幻灵水池UI动画
-    Asset("ANIM", "anim/tbat_raccoon_sign_content.zip"), -- 小浣熊木牌内容动画
 }
 
 -- 注册可复制组件
@@ -81,6 +79,6 @@ end
 modimport("scripts/tbat_containers.lua")     -- 容器相关
 modimport("scripts/tbat_cooking.lua")        -- 烹饪相关
 modimport("scripts/tbat_skinapi.lua")        -- 风铃的皮肤API
-modimport("scripts/tbat_tiledefs.lua")       -- 本mod定义
+modimport("scripts/tbat_tiledefs.lua")       -- 本mod地皮
 
 -- require("tbat_debugcommands")        -- 调试用指令

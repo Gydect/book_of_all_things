@@ -95,22 +95,6 @@ AddRecipe2(
     }
 )
 
--- 小浣熊木牌
-AddRecipe2(
-    "tbat_raccoon_sign",
-    {
-        Ingredient("goldnugget", 1),
-    },
-    TECH.SCIENCE_TWO,
-    {
-        placer = "tbat_raccoon_sign_placer",
-        min_spacing = 0,
-    },
-    {
-        "STRUCTURES",
-    }
-)
-
 -- 晓光玫瑰藤蔓
 AddRecipe2(
     "tbat_vine_rose",
@@ -140,6 +124,51 @@ AddRecipe2(
     },
     {
         "STRUCTURES",
+    }
+)
+
+-- 浮梦落雪地皮
+AddRecipe2(
+    "turf_tbat_snowfall",
+    {
+        Ingredient("goldnugget", 1),
+    },
+    TECH.SCIENCE_TWO,
+    {
+        numtogive = 8,
+    },
+    {
+        "DECOR",
+    }
+)
+
+-- 幻彩云间地皮
+AddRecipe2(
+    "turf_tbat_cloud",
+    {
+        Ingredient("goldnugget", 1),
+    },
+    TECH.SCIENCE_TWO,
+    {
+        numtogive = 8,
+    },
+    {
+        "DECOR",
+    }
+)
+
+-- 灵蝶幻境地皮
+AddRecipe2(
+    "turf_tbat_psylocke",
+    {
+        Ingredient("goldnugget", 1),
+    },
+    TECH.SCIENCE_TWO,
+    {
+        numtogive = 8,
+    },
+    {
+        "DECOR",
     }
 )
 
