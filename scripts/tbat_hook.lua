@@ -173,3 +173,26 @@ AddPrefabPostInit("world", function(inst)
 
     TheWorld:ListenForEvent("entity_droploot", droploot)
 end)
+
+-- ================================================================
+--[[容器UI相关改动]]
+-- ================================================================
+local ContainerWidget = require("widgets/containerwidget")
+local _Open = ContainerWidget.Open
+function ContainerWidget:Open(container, doer, ...)
+    _Open(self, container, doer, ...)
+    local widget = container.replica.container:GetWidget()
+    if widget.buttoninfo ~= nil then
+        self.button:SetTextures(
+            widget.buttoninfo.atlas or "images/ui.xml",
+            widget.buttoninfo.normal or "button_small.tex",
+            widget.buttoninfo.focus or "button_small_over.tex",
+            widget.buttoninfo.disabled or "button_small_disabled.tex",
+            widget.buttoninfo.down or nil,
+            widget.buttoninfo.selected or nil,
+            widget.buttoninfo.scale or { 1, 1 },
+            widget.buttoninfo.offset or { 0, 0 }
+        )
+    end
+    self:Refresh()
+end

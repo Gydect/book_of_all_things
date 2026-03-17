@@ -18,6 +18,16 @@ local function onhammered(inst, worker)
     inst:Remove()
 end
 
+local function OnHit(inst, worker)
+    if inst.components.container_proxy ~= nil then
+        inst.components.container_proxy:Close()
+    end
+end
+
+local function AttachShadowContainer(inst)
+    inst.components.container_proxy:SetMaster(TheWorld:GetPocketDimensionContainer("tbat_rose_twin_goose"))
+end
+
 local function fn()
     local inst = CreateEntity()
 
@@ -35,7 +45,9 @@ local function fn()
 
     inst.AnimState:SetBank("tbat_rose_twin_goose")
     inst.AnimState:SetBuild("tbat_rose_twin_goose")
-    inst.AnimState:PlayAnimation("idle1")
+    inst.AnimState:PlayAnimation("idle1", true)
+
+    inst:AddComponent("container_proxy")
 
     inst:AddTag("structure")
     inst:AddTag("tbat_rose_twin_goose")
@@ -56,9 +68,16 @@ local function fn()
     inst.components.workable:SetWorkAction(ACTIONS.HAMMER)
     inst.components.workable:SetWorkLeft(9)
     inst.components.workable:SetOnFinishCallback(onhammered)
+    inst.components.workable:SetOnWorkCallback(OnHit)
 
     inst:AddComponent("hauntable")
     inst.components.hauntable:SetHauntValue(TUNING.HAUNT_TINY)
+
+    inst.OnLoadPostPass = AttachShadowContainer
+
+    if not POPULATING then
+        AttachShadowContainer(inst)
+    end
 
     return inst
 end

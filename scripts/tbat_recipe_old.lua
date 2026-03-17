@@ -209,7 +209,7 @@ AddRecipe2(
     }
 )
 
--- 幻灵水池
+-- 玫瑰双生鹅
 AddRecipe2(
     "tbat_rose_twin_goose",
     {

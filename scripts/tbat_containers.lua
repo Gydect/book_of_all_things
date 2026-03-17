@@ -41,6 +41,14 @@ params.tbat_spirit_pool =
         animbuild = "ui_tbat_spirit_pool_3x3",
         pos = Vector3(0, 200, 0), -- 容器默认坐标
         side_align_tip = 160,
+        buttoninfo =
+        {
+            atlas = "images/tbat_hud.xml",
+            normal = "spirit_pool_close_button.tex",
+            focus = "spirit_pool_close_button.tex",
+            disabled = "spirit_pool_close_button.tex",
+            position = Vector3(189, 179, 0),
+        },
     },
     type = "chest", -- 容器类型,可以自定义,不同的容器类型可以同时打开
     usespecificslotsforitems = true,
@@ -50,6 +58,74 @@ function params.tbat_spirit_pool.itemtestfn(container, item, slot)
     return (slot ~= 5 and (item:HasTag("smalloceancreature") or item:HasTag("fish"))) or
         (slot == 5 and item:HasTag("tbat_reef_conch")) or
         (slot == nil and (item:HasTag("smalloceancreature") or item:HasTag("tbat_reef_conch") or item:HasTag("fish")))
+end
+
+function params.tbat_spirit_pool.widget.buttoninfo.fn(inst, doer)
+    if inst.components.container ~= nil then
+        BufferedAction(doer, inst, ACTIONS.RUMMAGE):Do()
+    elseif inst.replica.container ~= nil and not inst.replica.container:IsBusy() then
+        SendModRPCToServer(MOD_RPC.BOOKOFALLTHINGS.Closecontainer, inst)
+    end
+end
+
+-- ================================
+--[[注册容器:玫瑰双生鹅-1]]
+-- ================================
+params.tbat_rose_twin_goose =
+{
+    widget =
+    {
+        slotpos = {},
+        slotbg = {},
+        animbank = "ui_tbat_rose_twin_goose_12x5",
+        animbuild = "ui_tbat_rose_twin_goose_12x5",
+        pos = Vector3(0, 50, 0),
+        side_align_tip = 160,
+        buttoninfo =
+        {
+            atlas = "images/tbat_hud.xml",
+            normal = "rose_twin_goose_close_button.tex",
+            focus = "rose_twin_goose_close_button.tex",
+            disabled = "rose_twin_goose_close_button.tex",
+            position = Vector3(550, 190, 0),
+        },
+    },
+    type = "chest",
+}
+
+local rose_twin_goose_bg = { image = "rose_twin_goose_slot.tex", atlas = "images/tbat_hud.xml" }
+
+for y = 0, 4 do
+    table.insert(params.tbat_rose_twin_goose.widget.slotpos, Vector3(-402 + 0 * 70, -70 * y + 106, 0))
+    table.insert(params.tbat_rose_twin_goose.widget.slotpos, Vector3(-402 + 1 * 70, -70 * y + 106, 0))
+    table.insert(params.tbat_rose_twin_goose.widget.slotpos, Vector3(-402 + 2 * 70, -70 * y + 106, 0))
+    table.insert(params.tbat_rose_twin_goose.widget.slotpos, Vector3(-402 + 3 * 70, -70 * y + 106, 0))
+end
+for y = 0, 4 do
+    table.insert(params.tbat_rose_twin_goose.widget.slotpos, Vector3(-82 + 0 * 70, -70 * y + 106, 0))
+    table.insert(params.tbat_rose_twin_goose.widget.slotpos, Vector3(-82 + 1 * 70, -70 * y + 106, 0))
+    table.insert(params.tbat_rose_twin_goose.widget.slotpos, Vector3(-82 + 2 * 70, -70 * y + 106, 0))
+    table.insert(params.tbat_rose_twin_goose.widget.slotpos, Vector3(-82 + 3 * 70, -70 * y + 106, 0))
+end
+for y = 0, 4 do
+    table.insert(params.tbat_rose_twin_goose.widget.slotpos, Vector3(238 + 0 * 70, -70 * y + 106, 0))
+    table.insert(params.tbat_rose_twin_goose.widget.slotpos, Vector3(238 + 1 * 70, -70 * y + 106, 0))
+    table.insert(params.tbat_rose_twin_goose.widget.slotpos, Vector3(238 + 2 * 70, -70 * y + 106, 0))
+    table.insert(params.tbat_rose_twin_goose.widget.slotpos, Vector3(238 + 3 * 70, -70 * y + 106, 0))
+end
+for i = 1, 60 do
+    table.insert(params.tbat_rose_twin_goose.widget.slotbg, rose_twin_goose_bg)
+end
+function params.tbat_rose_twin_goose.itemtestfn(container, item, slot)
+    return not item:HasTag("irreplaceable")
+end
+
+function params.tbat_rose_twin_goose.widget.buttoninfo.fn(inst, doer)
+    if inst.components.container ~= nil then
+        BufferedAction(doer, inst, ACTIONS.RUMMAGE):Do()
+    elseif inst.replica.container ~= nil and not inst.replica.container:IsBusy() then
+        SendModRPCToServer(MOD_RPC.BOOKOFALLTHINGS.Closecontainer, inst)
+    end
 end
 
 -- ================================
