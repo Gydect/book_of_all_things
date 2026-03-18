@@ -24,7 +24,7 @@ local function OnHit(inst, worker)
     end
 end
 
-local function AttachShadowContainer(inst)
+local function AttachContainer(inst)
     inst.components.container_proxy:SetMaster(TheWorld:GetPocketDimensionContainer("tbat_rose_twin_goose"))
 end
 
@@ -73,10 +73,10 @@ local function fn()
     inst:AddComponent("hauntable")
     inst.components.hauntable:SetHauntValue(TUNING.HAUNT_TINY)
 
-    inst.OnLoadPostPass = AttachShadowContainer
+    inst.OnLoadPostPass = AttachContainer
 
     if not POPULATING then
-        AttachShadowContainer(inst)
+        AttachContainer(inst)
     end
 
     return inst

@@ -4,7 +4,7 @@ AddPrototyperDef("tbat_rose_twin_goose", { -- 玫瑰双生鹅
     icon_image = "station_tbat_rose_twin_goose.tex",
     is_crafting_station = true,
     action_str = "TBAT_TWIN_GOOSE",
-    filter_text = STRINGS.UI.CRAFTING_FILTERS.TBAT_TWIN_GOOSE,
+    filter_text = STRINGS.UI.CRAFTING_STATION_FILTERS.TBAT_TWIN_GOOSE,
 })
 
 -- 幻灵水池

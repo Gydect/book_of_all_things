@@ -69,8 +69,39 @@ function params.tbat_spirit_pool.widget.buttoninfo.fn(inst, doer)
 end
 
 -- ================================
---[[注册容器:玫瑰双生鹅-1]]
+--[[注册容器:玫瑰双生鹅-地皮]]
 -- ================================
+local tbat_rose_twin_goose_table = {
+    "tbat_rose_twin_goose_container",
+    "tbat_rose_twin_goose_wall_container",
+    "tbat_rose_twin_goose_fence_container",
+    "tbat_rose_twin_goose_plantable_container",
+    "tbat_rose_twin_goose_miscellaneous_container",
+    "tbat_rose_twin_goose_material_container",
+    "tbat_rose_twin_goose_decorate_container",
+}
+
+local function validfn(container, doer, button, num)
+    local prefab_name = tbat_rose_twin_goose_table[num]
+    if prefab_name == container.prefab then
+        if button then
+            button:SetTextures(
+                "images/tbat_hud.xml",
+                "rose_twin_goose_button2.tex",
+                "rose_twin_goose_button2.tex",
+                "rose_twin_goose_button2.tex",
+                nil,
+                nil,
+                { 0.9, 0.9 },
+                { 0, 0 }
+            )
+        end
+        return false
+    else
+        return true
+    end
+end
+
 params.tbat_rose_twin_goose =
 {
     widget =
@@ -88,6 +119,134 @@ params.tbat_rose_twin_goose =
             focus = "rose_twin_goose_close_button.tex",
             disabled = "rose_twin_goose_close_button.tex",
             position = Vector3(550, 190, 0),
+        },
+        tbat_buttons = {
+            {
+                atlas = "images/tbat_hud.xml",
+                normal = "rose_twin_goose_button1.tex",
+                focus = "rose_twin_goose_button1.tex",
+                disabled = "rose_twin_goose_button1.tex",
+                scale = { 0.9, 0.9 },
+                position = Vector3(-351.8, 188, 0),
+                floating_image = {
+                    atlas = "images/tbat_hud.xml",
+                    image = "ground.tex",
+                },
+                validfn = function(container, doer, button)
+                    return validfn(container, doer, button, 1)
+                end,
+                fn = function(container, doer)
+                    SendModRPCToServer(MOD_RPC.BOOKOFALLTHINGS.Changecontainer, container, "tbat_rose_twin_goose")
+                end,
+            },
+            {
+                atlas = "images/tbat_hud.xml",
+                normal = "rose_twin_goose_button1.tex",
+                focus = "rose_twin_goose_button1.tex",
+                disabled = "rose_twin_goose_button1.tex",
+                scale = { 0.9, 0.9 },
+                position = Vector3(-226.7, 188, 0),
+                floating_image = {
+                    atlas = "images/tbat_hud.xml",
+                    image = "wall.tex",
+                },
+                validfn = function(container, doer, button)
+                    return validfn(container, doer, button, 2)
+                end,
+                fn = function(container, doer)
+                    SendModRPCToServer(MOD_RPC.BOOKOFALLTHINGS.Changecontainer, container, "tbat_rose_twin_goose_wall")
+                end,
+            },
+            {
+                atlas = "images/tbat_hud.xml",
+                normal = "rose_twin_goose_button1.tex",
+                focus = "rose_twin_goose_button1.tex",
+                disabled = "rose_twin_goose_button1.tex",
+                scale = { 0.9, 0.9 },
+                position = Vector3(-101.6, 188, 0),
+                floating_image = {
+                    atlas = "images/tbat_hud.xml",
+                    image = "fence.tex",
+                },
+                validfn = function(container, doer, button)
+                    return validfn(container, doer, button, 3)
+                end,
+                fn = function(container, doer)
+                    SendModRPCToServer(MOD_RPC.BOOKOFALLTHINGS.Changecontainer, container, "tbat_rose_twin_goose_fence")
+                end,
+            },
+            {
+                atlas = "images/tbat_hud.xml",
+                normal = "rose_twin_goose_button1.tex",
+                focus = "rose_twin_goose_button1.tex",
+                disabled = "rose_twin_goose_button1.tex",
+                scale = { 0.9, 0.9 },
+                position = Vector3(23.5, 188, 0),
+                floating_image = {
+                    atlas = "images/tbat_hud.xml",
+                    image = "plantable.tex",
+                },
+                validfn = function(container, doer, button)
+                    return validfn(container, doer, button, 4)
+                end,
+                fn = function(container, doer)
+                    SendModRPCToServer(MOD_RPC.BOOKOFALLTHINGS.Changecontainer, container, "tbat_rose_twin_goose_plantable")
+                end,
+            },
+            {
+                atlas = "images/tbat_hud.xml",
+                normal = "rose_twin_goose_button1.tex",
+                focus = "rose_twin_goose_button1.tex",
+                disabled = "rose_twin_goose_button1.tex",
+                scale = { 0.9, 0.9 },
+                position = Vector3(148.6, 188, 0),
+                floating_image = {
+                    atlas = "images/tbat_hud.xml",
+                    image = "miscellaneous.tex",
+                },
+                validfn = function(container, doer, button)
+                    return validfn(container, doer, button, 5)
+                end,
+                fn = function(container, doer)
+                    SendModRPCToServer(MOD_RPC.BOOKOFALLTHINGS.Changecontainer, container, "tbat_rose_twin_goose_miscellaneous")
+                end,
+            },
+            {
+                atlas = "images/tbat_hud.xml",
+                normal = "rose_twin_goose_button1.tex",
+                focus = "rose_twin_goose_button1.tex",
+                disabled = "rose_twin_goose_button1.tex",
+                scale = { 0.9, 0.9 },
+                position = Vector3(273.7, 188, 0),
+                floating_image = {
+                    atlas = "images/tbat_hud.xml",
+                    image = "material.tex",
+                },
+                validfn = function(container, doer, button)
+                    return validfn(container, doer, button, 6)
+                end,
+                fn = function(container, doer)
+                    SendModRPCToServer(MOD_RPC.BOOKOFALLTHINGS.Changecontainer, container, "tbat_rose_twin_goose_material")
+                end,
+            },
+            {
+                atlas = "images/tbat_hud.xml",
+                normal = "rose_twin_goose_button1.tex",
+                focus = "rose_twin_goose_button1.tex",
+                disabled = "rose_twin_goose_button1.tex",
+                scale = { 0.9, 0.9 },
+                position = Vector3(398.8, 188, 0),
+                floating_image = {
+                    atlas = "images/tbat_hud.xml",
+                    image = "decorate.tex",
+                },
+                validfn = function(container, doer, button)
+                    return validfn(container, doer, button, 7)
+                end,
+                fn = function(container, doer)
+                    SendModRPCToServer(MOD_RPC.BOOKOFALLTHINGS.Changecontainer, container, "tbat_rose_twin_goose_decorate")
+                end,
+            },
         },
     },
     type = "chest",
@@ -117,7 +276,7 @@ for i = 1, 60 do
     table.insert(params.tbat_rose_twin_goose.widget.slotbg, rose_twin_goose_bg)
 end
 function params.tbat_rose_twin_goose.itemtestfn(container, item, slot)
-    return not item:HasTag("irreplaceable")
+    return item:HasTag("groundtile")
 end
 
 function params.tbat_rose_twin_goose.widget.buttoninfo.fn(inst, doer)
@@ -126,6 +285,60 @@ function params.tbat_rose_twin_goose.widget.buttoninfo.fn(inst, doer)
     elseif inst.replica.container ~= nil and not inst.replica.container:IsBusy() then
         SendModRPCToServer(MOD_RPC.BOOKOFALLTHINGS.Closecontainer, inst)
     end
+end
+
+-- ================================
+--[[注册容器:玫瑰双生鹅-墙体]]
+-- ================================
+params.tbat_rose_twin_goose_wall = deepcopy(params.tbat_rose_twin_goose)
+
+function params.tbat_rose_twin_goose_wall.itemtestfn(container, item, slot)
+    return item:HasTag("wallbuilder")
+end
+
+-- ================================
+--[[注册容器:玫瑰双生鹅-栅栏]]
+-- ================================
+params.tbat_rose_twin_goose_fence = deepcopy(params.tbat_rose_twin_goose)
+
+function params.tbat_rose_twin_goose_fence.itemtestfn(container, item, slot)
+    return item:HasTag("fencebuilder")
+end
+
+-- ================================
+--[[注册容器:玫瑰双生鹅-移植]]
+-- ================================
+params.tbat_rose_twin_goose_plantable = deepcopy(params.tbat_rose_twin_goose)
+
+function params.tbat_rose_twin_goose_plantable.itemtestfn(container, item, slot)
+    return item:HasTag("deployedplant")
+end
+
+-- ================================
+--[[注册容器:玫瑰双生鹅-杂项]]
+-- ================================
+params.tbat_rose_twin_goose_miscellaneous = deepcopy(params.tbat_rose_twin_goose)
+
+function params.tbat_rose_twin_goose_miscellaneous.itemtestfn(container, item, slot)
+    return not item:HasTag("irreplaceable")
+end
+
+-- ================================
+--[[注册容器:玫瑰双生鹅-材料]]
+-- ================================
+params.tbat_rose_twin_goose_material = deepcopy(params.tbat_rose_twin_goose)
+
+function params.tbat_rose_twin_goose_material.itemtestfn(container, item, slot)
+    return not item:HasTag("irreplaceable")
+end
+
+-- ================================
+--[[注册容器:玫瑰双生鹅-装饰]]
+-- ================================
+params.tbat_rose_twin_goose_decorate = deepcopy(params.tbat_rose_twin_goose)
+
+function params.tbat_rose_twin_goose_decorate.itemtestfn(container, item, slot)
+    return not item:HasTag("irreplaceable")
 end
 
 -- ================================
