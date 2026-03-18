@@ -102,7 +102,7 @@ local function validfn(container, doer, button, num)
     end
 end
 
-params.tbat_rose_twin_goose =
+params.tbat_rose_twin_goose_container =
 {
     widget =
     {
@@ -255,31 +255,31 @@ params.tbat_rose_twin_goose =
 local rose_twin_goose_bg = { image = "rose_twin_goose_slot.tex", atlas = "images/tbat_hud.xml" }
 
 for y = 0, 4 do
-    table.insert(params.tbat_rose_twin_goose.widget.slotpos, Vector3(-402 + 0 * 70, -70 * y + 106, 0))
-    table.insert(params.tbat_rose_twin_goose.widget.slotpos, Vector3(-402 + 1 * 70, -70 * y + 106, 0))
-    table.insert(params.tbat_rose_twin_goose.widget.slotpos, Vector3(-402 + 2 * 70, -70 * y + 106, 0))
-    table.insert(params.tbat_rose_twin_goose.widget.slotpos, Vector3(-402 + 3 * 70, -70 * y + 106, 0))
+    table.insert(params.tbat_rose_twin_goose_container.widget.slotpos, Vector3(-402 + 0 * 70, -70 * y + 106, 0))
+    table.insert(params.tbat_rose_twin_goose_container.widget.slotpos, Vector3(-402 + 1 * 70, -70 * y + 106, 0))
+    table.insert(params.tbat_rose_twin_goose_container.widget.slotpos, Vector3(-402 + 2 * 70, -70 * y + 106, 0))
+    table.insert(params.tbat_rose_twin_goose_container.widget.slotpos, Vector3(-402 + 3 * 70, -70 * y + 106, 0))
 end
 for y = 0, 4 do
-    table.insert(params.tbat_rose_twin_goose.widget.slotpos, Vector3(-82 + 0 * 70, -70 * y + 106, 0))
-    table.insert(params.tbat_rose_twin_goose.widget.slotpos, Vector3(-82 + 1 * 70, -70 * y + 106, 0))
-    table.insert(params.tbat_rose_twin_goose.widget.slotpos, Vector3(-82 + 2 * 70, -70 * y + 106, 0))
-    table.insert(params.tbat_rose_twin_goose.widget.slotpos, Vector3(-82 + 3 * 70, -70 * y + 106, 0))
+    table.insert(params.tbat_rose_twin_goose_container.widget.slotpos, Vector3(-82 + 0 * 70, -70 * y + 106, 0))
+    table.insert(params.tbat_rose_twin_goose_container.widget.slotpos, Vector3(-82 + 1 * 70, -70 * y + 106, 0))
+    table.insert(params.tbat_rose_twin_goose_container.widget.slotpos, Vector3(-82 + 2 * 70, -70 * y + 106, 0))
+    table.insert(params.tbat_rose_twin_goose_container.widget.slotpos, Vector3(-82 + 3 * 70, -70 * y + 106, 0))
 end
 for y = 0, 4 do
-    table.insert(params.tbat_rose_twin_goose.widget.slotpos, Vector3(238 + 0 * 70, -70 * y + 106, 0))
-    table.insert(params.tbat_rose_twin_goose.widget.slotpos, Vector3(238 + 1 * 70, -70 * y + 106, 0))
-    table.insert(params.tbat_rose_twin_goose.widget.slotpos, Vector3(238 + 2 * 70, -70 * y + 106, 0))
-    table.insert(params.tbat_rose_twin_goose.widget.slotpos, Vector3(238 + 3 * 70, -70 * y + 106, 0))
+    table.insert(params.tbat_rose_twin_goose_container.widget.slotpos, Vector3(238 + 0 * 70, -70 * y + 106, 0))
+    table.insert(params.tbat_rose_twin_goose_container.widget.slotpos, Vector3(238 + 1 * 70, -70 * y + 106, 0))
+    table.insert(params.tbat_rose_twin_goose_container.widget.slotpos, Vector3(238 + 2 * 70, -70 * y + 106, 0))
+    table.insert(params.tbat_rose_twin_goose_container.widget.slotpos, Vector3(238 + 3 * 70, -70 * y + 106, 0))
 end
 for i = 1, 60 do
-    table.insert(params.tbat_rose_twin_goose.widget.slotbg, rose_twin_goose_bg)
+    table.insert(params.tbat_rose_twin_goose_container.widget.slotbg, rose_twin_goose_bg)
 end
-function params.tbat_rose_twin_goose.itemtestfn(container, item, slot)
+function params.tbat_rose_twin_goose_container.itemtestfn(container, item, slot)
     return item:HasTag("groundtile")
 end
 
-function params.tbat_rose_twin_goose.widget.buttoninfo.fn(inst, doer)
+function params.tbat_rose_twin_goose_container.widget.buttoninfo.fn(inst, doer)
     if inst.components.container ~= nil then
         BufferedAction(doer, inst, ACTIONS.RUMMAGE):Do()
     elseif inst.replica.container ~= nil and not inst.replica.container:IsBusy() then
@@ -290,54 +290,54 @@ end
 -- ================================
 --[[注册容器:玫瑰双生鹅-墙体]]
 -- ================================
-params.tbat_rose_twin_goose_wall = deepcopy(params.tbat_rose_twin_goose)
+params.tbat_rose_twin_goose_wall_container = deepcopy(params.tbat_rose_twin_goose_container)
 
-function params.tbat_rose_twin_goose_wall.itemtestfn(container, item, slot)
+function params.tbat_rose_twin_goose_wall_container.itemtestfn(container, item, slot)
     return item:HasTag("wallbuilder")
 end
 
 -- ================================
 --[[注册容器:玫瑰双生鹅-栅栏]]
 -- ================================
-params.tbat_rose_twin_goose_fence = deepcopy(params.tbat_rose_twin_goose)
+params.tbat_rose_twin_goose_fence_container = deepcopy(params.tbat_rose_twin_goose_container)
 
-function params.tbat_rose_twin_goose_fence.itemtestfn(container, item, slot)
+function params.tbat_rose_twin_goose_fence_container.itemtestfn(container, item, slot)
     return item:HasTag("fencebuilder")
 end
 
 -- ================================
 --[[注册容器:玫瑰双生鹅-移植]]
 -- ================================
-params.tbat_rose_twin_goose_plantable = deepcopy(params.tbat_rose_twin_goose)
+params.tbat_rose_twin_goose_plantable_container = deepcopy(params.tbat_rose_twin_goose_container)
 
-function params.tbat_rose_twin_goose_plantable.itemtestfn(container, item, slot)
+function params.tbat_rose_twin_goose_plantable_container.itemtestfn(container, item, slot)
     return item:HasTag("deployedplant")
 end
 
 -- ================================
 --[[注册容器:玫瑰双生鹅-杂项]]
 -- ================================
-params.tbat_rose_twin_goose_miscellaneous = deepcopy(params.tbat_rose_twin_goose)
+params.tbat_rose_twin_goose_miscellaneous_container = deepcopy(params.tbat_rose_twin_goose_container)
 
-function params.tbat_rose_twin_goose_miscellaneous.itemtestfn(container, item, slot)
+function params.tbat_rose_twin_goose_miscellaneous_container.itemtestfn(container, item, slot)
     return not item:HasTag("irreplaceable")
 end
 
 -- ================================
 --[[注册容器:玫瑰双生鹅-材料]]
 -- ================================
-params.tbat_rose_twin_goose_material = deepcopy(params.tbat_rose_twin_goose)
+params.tbat_rose_twin_goose_material_container = deepcopy(params.tbat_rose_twin_goose_container)
 
-function params.tbat_rose_twin_goose_material.itemtestfn(container, item, slot)
+function params.tbat_rose_twin_goose_material_container.itemtestfn(container, item, slot)
     return not item:HasTag("irreplaceable")
 end
 
 -- ================================
 --[[注册容器:玫瑰双生鹅-装饰]]
 -- ================================
-params.tbat_rose_twin_goose_decorate = deepcopy(params.tbat_rose_twin_goose)
+params.tbat_rose_twin_goose_decorate_container = deepcopy(params.tbat_rose_twin_goose_container)
 
-function params.tbat_rose_twin_goose_decorate.itemtestfn(container, item, slot)
+function params.tbat_rose_twin_goose_decorate_container.itemtestfn(container, item, slot)
     return not item:HasTag("irreplaceable")
 end
 
