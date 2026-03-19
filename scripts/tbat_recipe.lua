@@ -7,6 +7,14 @@ AddPrototyperDef("tbat_rose_twin_goose", { -- 玫瑰双生鹅
     filter_text = STRINGS.UI.CRAFTING_STATION_FILTERS.TBAT_TWIN_GOOSE,
 })
 
+local function CanPlaceRoseTwinGoose(pt, rot)
+    if TheWorld ~= nil and TheWorld.tbat_twin_goose_level ~= nil then
+        return TheWorld.tbat_twin_goose_level:value() < 1
+    end
+
+    return TheSim == nil or TheSim:FindFirstEntityWithTag("tbat_rose_twin_goose") == nil
+end
+
 -- 幻灵水池
 AddRecipe2(
     "tbat_spirit_pool",
@@ -206,8 +214,24 @@ AddRecipe2(
     {
         placer = "tbat_rose_twin_goose_placer",
         min_spacing = 0,
+        testfn = CanPlaceRoseTwinGoose,
     },
     {
         "STRUCTURES",
+    }
+)
+
+-- 玫瑰小鹅蛋
+AddRecipe2(
+    "tbat_rose_goose_egg",
+    {
+        Ingredient("goldnugget", 1),
+    },
+    TECH.TBAT_TWIN_GOOSE_TECH_ONE,
+    {
+        nounlock = true
+    },
+    {
+        "MAGIC",
     }
 )

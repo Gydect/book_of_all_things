@@ -98,6 +98,13 @@ local function validfn(container, doer, button, num)
         end
         return false
     else
+        if (prefab_name == "tbat_rose_twin_goose_material_container" or prefab_name == "tbat_rose_twin_goose_decorate_container")
+            and TheWorld.tbat_twin_goose_level:value() < 2 then
+            if button and button.floating_image then
+                button.floating_image:SetTexture("images/tbat_hud.xml", "lock.tex")
+            end
+            return false
+        end
         return true
     end
 end

@@ -32,6 +32,7 @@ PrefabFiles = {
     "tbat_vine_rose",                     -- 晓光玫瑰藤蔓
     "tbat_dreamsea_coral",                -- 幻海珊瑚
     "tbat_rose_twin_goose",               -- 玫瑰双生鹅
+    "tbat_rose_goose_egg",                -- 玫瑰小鹅蛋
 }
 
 Assets = {

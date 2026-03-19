@@ -35,6 +35,31 @@ local actions = {
             return false
         end,
     },
+    TBAT_GOOSE_GIVE = {
+        id = "TBAT_GOOSE_GIVE",
+        priority = 6,
+        strfn = function(act)
+            return "GENERIC"
+        end,
+        fn = function(act)
+            local item = act.invobject
+            local targ = act.target
+            if targ == nil or item == nil then
+                return false
+            end
+            local now_exp = targ:GetTwinGooseExp()
+            local need_exp = 99 - now_exp
+            local stack_size = item.components.stackable ~= nil and item.components.stackable:StackSize() or 1
+            local add_exp = math.min(need_exp, stack_size)
+            targ:AddTwinGooseExp(add_exp)
+            if item.components.stackable ~= nil then
+                item.components.stackable:Get(add_exp):Remove()
+            else
+                item:Remove()
+            end
+            return true
+        end,
+    },
 }
 
 for _, action in pairs(actions) do
@@ -54,6 +79,8 @@ AddStategraphActionHandler("wilson", ActionHandler(ACTIONS.TBAT_READ, "reading_t
 AddStategraphActionHandler("wilson_client", ActionHandler(ACTIONS.TBAT_READ, "reading_tbat_adventurers_notes"))
 AddStategraphActionHandler("wilson", ActionHandler(ACTIONS.TBAT_SALVAGE, "dolongaction"))
 AddStategraphActionHandler("wilson_client", ActionHandler(ACTIONS.TBAT_SALVAGE, "dolongaction"))
+AddStategraphActionHandler("wilson", ActionHandler(ACTIONS.TBAT_GOOSE_GIVE, "give"))
+AddStategraphActionHandler("wilson_client", ActionHandler(ACTIONS.TBAT_GOOSE_GIVE, "give"))
 
 -- =======================================
 -- [[ ADD COMPONENT ACTION ]]
@@ -75,6 +102,16 @@ AddComponentAction("SCENE", "tbat_pool", function(inst, doer, _actions, right)
         table.insert(_actions, ACTIONS.TBAT_SALVAGE)
     end
 end)
+AddComponentAction("INVENTORY", "container_proxy", function(inst, doer, _actions, right)
+    if inst:HasTag("tbat_rose_goose_egg") and inst.components.container_proxy:CanBeOpened() and doer.replica.inventory ~= nil then
+        table.insert(_actions, ACTIONS.RUMMAGE)
+    end
+end)
+AddComponentAction("USEITEM", "inventoryitem", function(inst, doer, target, _actions, right)
+    if inst.prefab == "tbat_food_valorbush" and target:HasTag("tbat_rose_twin_goose") and not target:HasTag("tbat_rose_twin_goose_2") then
+        table.insert(_actions, ACTIONS.TBAT_GOOSE_GIVE)
+    end
+end)
 
 -- 先创建动作再命名
 STRINGS.ACTIONS.TBAT_READ = {
@@ -87,4 +124,8 @@ STRINGS.ACTIONS.TBAT_SALVAGE = {
 STRINGS.CHARACTERS.GENERIC.ACTIONFAIL.TBAT_SALVAGE = {
     NO_FISH = STRINGS.TBAT_ACTIONS.TBAT_SALVAGE.ACTIONFAIL.NO_FISH,
     NO_BAIT = STRINGS.TBAT_ACTIONS.TBAT_SALVAGE.ACTIONFAIL.NO_BAIT,
+}
+
+STRINGS.ACTIONS.TBAT_GOOSE_GIVE = {
+    GENERIC = STRINGS.TBAT_ACTIONS.TBAT_GOOSE_GIVE.GENERIC,
 }

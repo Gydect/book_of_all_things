@@ -331,3 +331,79 @@ for _, prefab in ipairs(tbat_rose_twin_goose_table) do
         end)
     end)
 end
+
+-- ================================================================
+--[[世界hook,双生鹅容器相关]]
+-- ================================================================
+local function FindTwinGooseEntity(exclude_inst)
+    for _, ent in pairs(Ents) do
+        if ent ~= exclude_inst and ent.prefab == "tbat_rose_twin_goose" and ent:IsValid() then
+            return ent
+        end
+    end
+end
+
+local function GetTwinGooseLevel(goose)
+    if goose == nil or not goose:IsValid() then
+        return 0
+    end
+
+    local level = goose.GetTwinGooseLevel ~= nil and goose:GetTwinGooseLevel() or goose.tbat_level or 1
+    if level < 1 then
+        return 1
+    elseif level > 2 then
+        return 2
+    end
+
+    return level
+end
+
+local function RefreshTwinGooseState(world)
+    if world == nil or world.tbat_twin_goose_level == nil then
+        return nil
+    end
+
+    local goose = world._tbat_rose_twin_goose
+    if goose == nil or not goose:IsValid() then
+        goose = FindTwinGooseEntity()
+    end
+
+    world._tbat_rose_twin_goose = goose
+    world.tbat_twin_goose_level:set(GetTwinGooseLevel(goose))
+    world:PushEvent("tbat_refresh_twin_goose_state", { level = world.tbat_twin_goose_level:value() })
+
+    return goose
+end
+
+AddPrefabPostInit("world", function(inst)
+    inst.tbat_twin_goose_level = net_smallbyte(inst.GUID, "world.tbat_twin_goose_level")
+
+    if not TheWorld.ismastersim then
+        return
+    end
+
+    inst._tbat_refresh_twin_goose_state = RefreshTwinGooseState
+    inst.tbat_twin_goose_level:set(0)
+    local oldOnSave = inst.OnSave
+    inst.OnSave = function(_inst, data)
+        RefreshTwinGooseState(inst)
+        data.tbat_twin_goose_level = inst.tbat_twin_goose_level:value()
+        if oldOnSave ~= nil then
+            oldOnSave(_inst, data)
+        end
+    end
+
+    local oldOnLoad = inst.OnLoad
+    inst.OnLoad = function(_inst, data)
+        if data ~= nil and data.tbat_twin_goose_level ~= nil then
+            inst.tbat_twin_goose_level:set(data.tbat_twin_goose_level)
+        end
+        if oldOnLoad ~= nil then
+            oldOnLoad(_inst, data)
+        end
+        inst:DoTaskInTime(0, inst._tbat_refresh_twin_goose_state)
+    end
+
+    inst:DoTaskInTime(0, inst._tbat_refresh_twin_goose_state)
+end)
+
