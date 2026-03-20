@@ -1,11 +1,15 @@
 -- ================================================================
 --[[给幻灵水池容器做特殊处理,实现特殊槽位多slots]]
 -- ================================================================
-local TARGET_CONTAINER_PREFAB = "tbat_spirit_pool" -- 仅干预自己mod的容器,避免和其他mod冲突
+-- 仅干预自己mod的容器,避免和其他mod冲突
+local TARGET_CONTAINER_PREFAB = {
+    tbat_spirit_pool = true,
+    tbat_pet_washer = true,
+}
 
 local function IsTargetContainer(self, item)
     return self.inst ~= nil
-        and self.inst.prefab == TARGET_CONTAINER_PREFAB
+        and TARGET_CONTAINER_PREFAB[self.inst.prefab] == true
 end
 
 local function GetStackable(item)
@@ -75,7 +79,7 @@ local Fishable = require("components/fishable")
 local _HookFish = Fishable.HookFish
 -- 剩余鱼数量始终在最大值
 function Fishable:HookFish(fisherman, ...)
-    if self.inst ~= nil and self.inst.prefab == TARGET_CONTAINER_PREFAB then
+    if self.inst ~= nil and TARGET_CONTAINER_PREFAB[self.inst.prefab] == true then
         -- 让幻灵水池的鱼池组件在被钓鱼杆钓到时也能正常工作
         local fish = _HookFish(self, fisherman, ...)
         if fish.build == nil then
@@ -96,14 +100,14 @@ local _OnUpdate = FishingRod.OnUpdate
 local _StopFishing = FishingRod.StopFishing
 local _Hook = FishingRod.Hook
 function FishingRod:OnUpdate(dt, ...)
-    if self:IsFishing() and self.target and self.target.prefab == TARGET_CONTAINER_PREFAB then
+    if self:IsFishing() and self.target and TARGET_CONTAINER_PREFAB[self.target.prefab] == true then
         self.target.components.container.canbeopened = false
     end
     _OnUpdate(self, dt, ...)
 end
 
 function FishingRod:StopFishing(...)
-    if self.target and self.target.prefab == TARGET_CONTAINER_PREFAB then
+    if self.target and TARGET_CONTAINER_PREFAB[self.target.prefab] == true then
         self.target.components.container.canbeopened = true
     end
     _StopFishing(self, ...)
@@ -424,4 +428,3 @@ AddPrefabPostInit("world", function(inst)
 
     inst:DoTaskInTime(0, inst._tbat_refresh_twin_goose_state)
 end)
-

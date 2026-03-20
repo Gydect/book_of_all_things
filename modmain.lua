@@ -33,6 +33,7 @@ PrefabFiles = {
     "tbat_dreamsea_coral",                -- 幻海珊瑚
     "tbat_rose_twin_goose",               -- 玫瑰双生鹅
     "tbat_rose_goose_egg",                -- 玫瑰小鹅蛋
+    "tbat_pet_washer",                    -- 萌宠洗衣机
 }
 
 Assets = {
@@ -54,6 +55,7 @@ Assets = {
 
     Asset("ANIM", "anim/ui_tbat_spirit_pool_3x3.zip"),      -- 幻灵水池UI动画
     Asset("ANIM", "anim/ui_tbat_rose_twin_goose_12x5.zip"), -- 玫瑰双生鹅UI动画
+    Asset("ANIM", "anim/ui_tbat_pet_washer_6x3.zip"),       -- 萌宠洗衣机UI动画
 }
 
 -- 注册可复制组件

@@ -357,6 +357,86 @@ function params.tbat_rose_twin_goose_decorate_container.itemtestfn(container, it
 end
 
 -- ================================
+--[[注册容器:萌宠洗衣机]]
+-- ================================
+params.tbat_pet_washer = {
+    widget =
+    {
+        slotpos = {},
+        slotbg = {},
+        animbank = "ui_tbat_pet_washer_6x3",
+        animbuild = "ui_tbat_pet_washer_6x3",
+        pos = Vector3(0, 180, 0),
+        side_align_tip = 160,
+        buttoninfo =
+        {
+            atlas = "images/tbat_hud.xml",
+            normal = "pet_washer_close_button.tex",
+            focus = "pet_washer_close_button.tex",
+            disabled = "pet_washer_close_button.tex",
+            position = Vector3(178, 135, 0),
+        },
+        tbat_buttons = {
+            {
+                atlas = "images/tbat_hud.xml",
+                normal = "pet_washer_button1.tex",
+                focus = "pet_washer_button1.tex",
+                disabled = "pet_washer_button1.tex",
+                position = Vector3(-270, 35, 0),
+                fn = function(container, doer)
+                    SendModRPCToServer(MOD_RPC.BOOKOFALLTHINGS.UsePetWasher, container, "add")
+                end,
+            },
+            {
+                atlas = "images/tbat_hud.xml",
+                normal = "pet_washer_button2.tex",
+                focus = "pet_washer_button2.tex",
+                disabled = "pet_washer_button2.tex",
+                position = Vector3(282, 35, 0),
+                fn = function(container, doer)
+                    SendModRPCToServer(MOD_RPC.BOOKOFALLTHINGS.UsePetWasher, container, "reduce")
+                end,
+            },
+        },
+    },
+    type = "chest",
+    usespecificslotsforitems = true,
+}
+
+for y = 0, 2 do
+    table.insert(params.tbat_pet_washer.widget.slotpos, Vector3(-175 + 0 * 72, -72 * y + 33, 0))
+    table.insert(params.tbat_pet_washer.widget.slotpos, Vector3(-175 + 1 * 72, -72 * y + 33, 0))
+    table.insert(params.tbat_pet_washer.widget.slotpos, Vector3(-175 + 2 * 72, -72 * y + 33, 0))
+    table.insert(params.tbat_pet_washer.widget.slotpos, Vector3(-175 + 3 * 72, -72 * y + 33, 0))
+    table.insert(params.tbat_pet_washer.widget.slotpos, Vector3(-175 + 4 * 72, -72 * y + 33, 0))
+    table.insert(params.tbat_pet_washer.widget.slotpos, Vector3(-175 + 5 * 72, -72 * y + 33, 0))
+end
+
+local pet_washer_bg = { image = "pet_washer_slot.tex", atlas = "images/tbat_hud.xml" }
+local pet_washer_bg_props = { image = "pet_washer_slot_props.tex", atlas = "images/tbat_hud.xml" }
+
+for i = 1, 18 do
+    table.insert(params.tbat_pet_washer.widget.slotbg, pet_washer_bg)
+end
+
+table.insert(params.tbat_pet_washer.widget.slotpos, Vector3(-135, 133, 0))
+table.insert(params.tbat_pet_washer.widget.slotbg, pet_washer_bg_props)
+
+function params.tbat_pet_washer.itemtestfn(container, item, slot)
+    return (slot ~= 19 and item.replica.equippable and (not item.replica.stackable)) or
+        (slot == 19 and item.prefab == "tbat_material_lavender_laundry_detergent") or
+        (slot == nil and (item.replica.equippable or item.prefab == "tbat_material_lavender_laundry_detergent" or item.replica.stackable))
+end
+
+function params.tbat_pet_washer.widget.buttoninfo.fn(inst, doer)
+    if inst.components.container ~= nil then
+        BufferedAction(doer, inst, ACTIONS.RUMMAGE):Do()
+    elseif inst.replica.container ~= nil and not inst.replica.container:IsBusy() then
+        SendModRPCToServer(MOD_RPC.BOOKOFALLTHINGS.Closecontainer, inst)
+    end
+end
+
+-- ================================
 --[[修改容器注册函数]]
 -- ================================
 for k, v in pairs(params) do
