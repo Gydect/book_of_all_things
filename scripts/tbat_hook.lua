@@ -24,24 +24,46 @@ end
 
 local function FindFirstAvailableSpecificSlot(self, item)
     local empty_slot = nil
-
-    for i = 1, self:GetNumSlots() do
-        if self:itemtestfn(item, i) then
-            local slot_item = self:GetItemInSlot(i)
-            if slot_item == nil then
-                empty_slot = empty_slot or i
-            elseif self:AcceptsStacks()
-                and slot_item.prefab == item.prefab
-                and slot_item.skinname == item.skinname then
-                local stackable = GetStackable(slot_item)
-                if stackable ~= nil and not stackable:IsFull() then
-                    return i
+    if self.usespecificslotsforitems and not self.readonlycontainer and self.itemtestfn ~= nil then
+        for i = 1, self:GetNumSlots() do
+            if self:itemtestfn(item, i) then
+                local slot_item = self:GetItemInSlot(i)
+                if slot_item == nil then
+                    empty_slot = empty_slot or i
+                elseif self:AcceptsStacks()
+                    and slot_item.prefab == item.prefab
+                    and slot_item.skinname == item.skinname then
+                    local stackable = GetStackable(slot_item)
+                    if stackable ~= nil and not stackable:IsFull() then
+                        return i
+                    end
                 end
             end
         end
+        return empty_slot
     end
+end
 
-    return empty_slot
+local function FindFirstAvailableSpecificSlot_Replica(self, item)
+    local empty_slot = nil
+    if self.usespecificslotsforitems and not self:IsReadOnlyContainer() and self.itemtestfn ~= nil then
+        for i = 1, self:GetNumSlots() do
+            if self:itemtestfn(item, i) then
+                local slot_item = self:GetItemInSlot(i)
+                if slot_item == nil then
+                    empty_slot = empty_slot or i
+                elseif self:AcceptsStacks()
+                    and slot_item.prefab == item.prefab
+                    and slot_item.skinname == item.skinname then
+                    local stackable = GetStackable(slot_item)
+                    if stackable ~= nil and not stackable:IsFull() then
+                        return i
+                    end
+                end
+            end
+        end
+        return empty_slot
+    end
 end
 
 local Container = require("components/container")
@@ -68,7 +90,7 @@ if not ContainerReplica._tbat_specific_slot_hooked then
             return _GetSpecificSlotForItem(self, item, ...)
         end
 
-        return FindFirstAvailableSpecificSlot(self, item)
+        return FindFirstAvailableSpecificSlot_Replica(self, item)
     end
 end
 

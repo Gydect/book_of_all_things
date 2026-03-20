@@ -250,3 +250,21 @@ AddRecipe2(
         "TBAT_RECIPE_FILTER_ITEM",
     }
 )
+
+-- 萌宠洗衣机
+AddRecipe2(
+    "tbat_pet_washer",
+    {
+        Ingredient("tbat_material_lavender_laundry_detergent", 5),
+        Ingredient("tbat_material_wish_token", 5),
+        Ingredient("tbat_material_memory_crystal", 20)
+    },
+    TECH.TBAT_THE_TREE_OF_ALL_THINGS_ONE,
+    {
+        placer = "tbat_pet_washer_placer",
+        min_spacing = 0,
+    },
+    {
+        "TBAT_RECIPE_FILTER_BUILDING",
+    }
+)

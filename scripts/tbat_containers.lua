@@ -326,7 +326,7 @@ end
 params.tbat_rose_twin_goose_plantable_container = deepcopy(params.tbat_rose_twin_goose_container)
 
 function params.tbat_rose_twin_goose_plantable_container.itemtestfn(container, item, slot)
-    return item:HasTag("deployedplant")
+    return item:HasTag("deployedplant") or item:HasTag("deployable")
 end
 
 -- ================================

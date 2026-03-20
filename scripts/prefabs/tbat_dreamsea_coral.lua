@@ -23,7 +23,6 @@ local function fn()
     inst.entity:AddTransform()
     inst.entity:AddAnimState()
     inst.entity:AddSoundEmitter()
-    inst.entity:AddLight()
     inst.entity:AddNetwork()
 
     -- inst:SetDeploySmartRadius(0.75)
@@ -32,14 +31,6 @@ local function fn()
     inst.AnimState:SetBank("tbat_dreamsea_coral")
     inst.AnimState:SetBuild("tbat_dreamsea_coral")
     inst.AnimState:PlayAnimation("idle", true)
-
-    inst.Light:SetColour(1, 1, 1) -- 白色光
-    inst.Light:SetRadius(1)       -- 设置光照范围
-    inst.Light:SetFalloff(0.7)    -- 设置光照衰减率
-    inst.Light:SetIntensity(0.7)  -- 设置光照强度
-    inst.Light:Enable(true)
-
-    inst.AnimState:SetBloomEffectHandle("shaders/anim.ksh") -- 加个泛光,游戏中可以在官方设置中开启关闭
 
     inst:AddTag("structure")
 

@@ -235,3 +235,19 @@ AddRecipe2(
         "MAGIC",
     }
 )
+
+-- 萌宠洗衣机
+AddRecipe2(
+    "tbat_pet_washer",
+    {
+        Ingredient("goldnugget", 1),
+    },
+    TECH.SCIENCE_TWO,
+    {
+        placer = "tbat_pet_washer_placer",
+        min_spacing = 0,
+    },
+    {
+        "STRUCTURES",
+    }
+)

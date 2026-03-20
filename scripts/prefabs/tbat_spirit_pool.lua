@@ -170,13 +170,15 @@ local function commonfn()
     inst.entity:AddMiniMapEntity()
     inst.entity:AddNetwork()
 
-    -- MakePondPhysics(inst, 1.95)
+    MakePondPhysics(inst, 2.1)
 
     inst.AnimState:SetBuild("tbat_spirit_pool")
     inst.AnimState:SetBank("tbat_spirit_pool")
     inst.AnimState:PlayAnimation("idle", true)
     inst.AnimState:SetLayer(LAYER_BACKGROUND)
     inst.AnimState:SetSortOrder(3)
+
+    inst.Transform:SetScale(0.5, 0.5, 1)
 
     inst.MiniMapEntity:SetIcon("tbat_spirit_pool.tex")
 
@@ -188,7 +190,7 @@ local function commonfn()
 
     inst.no_wet_prefix = true               -- 没有潮湿的前缀
 
-    -- inst:SetDeploySmartRadius(2)
+    inst:SetDeploySmartRadius(2.5)
 
     inst.entity:SetPristine()
 
@@ -236,4 +238,4 @@ end
 
 return
     Prefab("tbat_spirit_pool", pondcrab, assets, prefabs),
-    MakePlacer("tbat_spirit_pool_placer", "tbat_spirit_pool", "tbat_spirit_pool", "idle")
+    MakePlacer("tbat_spirit_pool_placer", "tbat_spirit_pool", "tbat_spirit_pool", "idle", nil, nil, nil, 0.5)
