@@ -59,13 +59,24 @@ AddModRPCHandler("BOOKOFALLTHINGS", "UsePetWasher", function(player, container, 
     end
     local ok, count = container.components.container:Has("tbat_material_lavender_laundry_detergent", 5)
     if not ok then
+        container.components.talker:Say("当前洗衣液不够洗这么多衣服，请在拿一点给我吧~")
         return
     end
     local num_items = container.components.container:NumItems() - 1
-    local needed_count = num_items * 5
-    if count < needed_count then
+    if num_items <= 0 then
+        container.components.talker:Say("没东西可以洗哦~")
         return
     end
+    local needed_count = num_items * 5
+    if count < needed_count then
+        container.components.talker:Say("当前洗衣液不够洗这么多衣服，请在拿一点给我吧~")
+        return
+    end
+
+    if container.StartTBATWork ~= nil and not container:StartTBATWork() then
+        return
+    end
+
     if status == "add" then
         container.components.container:ForEachItem(add, needed_count)
     elseif status == "reduce" then

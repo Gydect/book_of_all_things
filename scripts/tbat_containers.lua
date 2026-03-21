@@ -423,9 +423,9 @@ table.insert(params.tbat_pet_washer.widget.slotpos, Vector3(-135, 133, 0))
 table.insert(params.tbat_pet_washer.widget.slotbg, pet_washer_bg_props)
 
 function params.tbat_pet_washer.itemtestfn(container, item, slot)
-    return (slot ~= 19 and item.replica.equippable and (not item.replica.stackable)) or
+    return (slot ~= 19 and item:HasTag("tbat_pet_washer_able")) or
         (slot == 19 and item.prefab == "tbat_material_lavender_laundry_detergent") or
-        (slot == nil and (item.replica.equippable or item.prefab == "tbat_material_lavender_laundry_detergent" or item.replica.stackable))
+        (slot == nil and (item.prefab == "tbat_material_lavender_laundry_detergent" or item:HasTag("tbat_pet_washer_able")))
 end
 
 function params.tbat_pet_washer.widget.buttoninfo.fn(inst, doer)

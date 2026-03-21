@@ -450,3 +450,25 @@ AddPrefabPostInit("world", function(inst)
 
     inst:DoTaskInTime(0, inst._tbat_refresh_twin_goose_state)
 end)
+
+-- ================================================================
+--[[给finiteUses和armor组件添加本mod统一标签，方便洗衣机容器识别]]
+-- ================================================================
+AddComponentPostInit("finiteuses", function(self)
+    self.inst:AddTag("tbat_pet_washer_able")
+end)
+AddComponentPostInit("armor", function(self)
+    self.inst:AddTag("tbat_pet_washer_able")
+end)
+
+local Armor = require("components/armor")
+local _SetCondition = Armor.SetCondition
+function Armor:SetCondition(amount)
+    if not self.indestructible and amount ~= nil and amount > self.maxcondition then
+        self.condition = amount
+        self.inst:PushEvent("percentusedchange", { percent = self:GetPercent() })
+        return
+    end
+
+    return _SetCondition(self, amount)
+end
