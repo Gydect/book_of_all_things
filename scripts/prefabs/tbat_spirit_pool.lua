@@ -170,7 +170,7 @@ local function commonfn()
     inst.entity:AddMiniMapEntity()
     inst.entity:AddNetwork()
 
-    MakePondPhysics(inst, 2.1)
+    MakePondPhysics(inst, 3)
 
     inst.AnimState:SetBuild("tbat_spirit_pool")
     inst.AnimState:SetBank("tbat_spirit_pool")
