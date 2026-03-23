@@ -89,6 +89,7 @@ local function fn()
 
     inst.MiniMapEntity:SetIcon("tbat_moonlit_memory_crystal_spring.tex")
 
+    inst:AddTag("watersource") -- 水源
     inst:AddTag("pond")
     inst:AddTag("antlion_sinkhole_blocker")
     inst:AddTag("birdblocker")
@@ -114,6 +115,8 @@ local function fn()
         fx:SetMaterial("metal")
         inst:Remove()
     end)
+
+    inst:AddComponent("watersource")
 
     inst:AddComponent("hauntable")
     inst.components.hauntable:SetHauntValue(TUNING.HAUNT_TINY)
