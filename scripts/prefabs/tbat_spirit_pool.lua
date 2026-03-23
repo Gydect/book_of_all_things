@@ -18,32 +18,58 @@ local function onhammered(inst, worker)
     inst:Remove()
 end
 
+local function SayToFisherman(inst, message)
+    local fisherman = inst.tbat_fisherman
+    if fisherman ~= nil and fisherman.components.talker ~= nil then
+        fisherman:DoTaskInTime(20 * FRAMES, function(doer)
+            if doer ~= nil and doer:IsValid() and doer.components.talker ~= nil then
+                doer.components.talker:Say(message)
+            end
+        end)
+    end
+end
+
+local function ConsumeBait(container, bait)
+    if bait == nil then
+        return false
+    end
+
+    if bait.components.stackable ~= nil then
+        local consumed = bait.components.stackable:Get(1)
+        if consumed ~= nil then
+            consumed:Remove()
+            return true
+        end
+        return false
+    end
+
+    local consumed = container:RemoveItem(bait, false)
+    if consumed ~= nil then
+        consumed:Remove()
+        return true
+    end
+
+    return false
+end
+
 local function GetFishFn(inst)
     local container = inst.components.container
     if container == nil then
         return "weregoose_splash_med2" -- 钓上去一个特效，哈哈
     end
 
-    if inst.tbat_fishingrod == nil and inst.tbat_fisherman == nil then
+    if inst.tbat_fishingrod == nil or inst.tbat_fisherman == nil then
         return "weregoose_splash_med2"
     end
 
     if inst.tbat_fishingrod ~= "tbat_eq_fantasy_tool" then
-        if inst.tbat_fisherman.components.talker then
-            inst.tbat_fisherman:DoTaskInTime(20 * FRAMES, function(fisherman)
-                fisherman.components.talker:Say("我大概需要一个美貌与实用并存的工具")
-            end)
-        end
+        SayToFisherman(inst, "我大概需要一个美貌与实用并存的工具")
         return "weregoose_splash_med2"
     end
 
     local bait = container:GetItemInSlot(5)
     if bait == nil then
-        if inst.tbat_fisherman.components.talker then
-            inst.tbat_fisherman:DoTaskInTime(20 * FRAMES, function(fisherman)
-                fisherman.components.talker:Say("没有诱饵，我不是姜太公")
-            end)
-        end
+        SayToFisherman(inst, "没有诱饵，我不是姜太公")
         return "weregoose_splash_med2"
     end
 
@@ -52,21 +78,24 @@ local function GetFishFn(inst)
     local fishitem = container:GetItemInSlot(slot)
 
     if fishitem == nil then
-        if inst.tbat_fisherman.components.talker then
-            inst.tbat_fisherman:DoTaskInTime(20 * FRAMES, function(fisherman)
-                fisherman.components.talker:Say("没有饲养鱼或饲养鱼太少")
-            end)
-        end
+        SayToFisherman(inst, "没有饲养鱼或饲养鱼太少")
         return "weregoose_splash_med2"
     end
 
-    if bait.components.stackable ~= nil then
-        local consumed = bait.components.stackable:Get(1)
-        if consumed ~= nil then
-            consumed:Remove()
-        end
-    else
-        bait:Remove()
+    local pool = inst.components.tbat_pool
+    if pool ~= nil and not pool:CanFish(inst.tbat_fisherman) then
+        SayToFisherman(inst, "别钓了，小鱼还没长大呢，明天在试试吧~")
+        return "weregoose_splash_med2"
+    end
+
+    if not ConsumeBait(container, bait) then
+        SayToFisherman(inst, "没有诱饵，我不是姜太公")
+        return "weregoose_splash_med2"
+    end
+
+    if pool ~= nil and not pool:ConsumeFishingChance(inst.tbat_fisherman) then
+        SayToFisherman(inst, "别钓了，小鱼还没长大呢，明天在试试吧~")
+        return "weregoose_splash_med2"
     end
 
     return fishitem.prefab

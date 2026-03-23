@@ -116,7 +116,7 @@ STRINGS.TBAT_ACTIONS.TBAT_SALVAGE = {
     ACTIONFAIL = {
         NO_FISH = "好像还没有养鱼呢",
         NO_BAIT = "没有吃饱的小鱼，我也不能吃",
-        ALREADY_SALVAGED_TODAY = "一天一次，不许贪得无厌",
+        ALREADY_SALVAGED_TODAY = "别捞了，小鱼还没长大呢，明天在试试吧~",
     },
 }
 
