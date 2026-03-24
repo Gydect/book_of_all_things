@@ -44,7 +44,7 @@ local function makenote(index)
         end
 
         inst:AddTag("tbat_note")
-        inst:AddTag("tbat_item_notes_of_adventurer")
+        -- inst:AddTag("tbat_item_notes_of_adventurer")
 
         inst.entity:SetPristine()
 
