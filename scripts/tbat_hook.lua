@@ -472,3 +472,32 @@ function Armor:SetCondition(amount)
 
     return _SetCondition(self, amount)
 end
+
+-- ================================================================
+--[[礁石海螺添加获取方式,联动旧mod]]
+-- ================================================================
+if GLOBAL.BOOKOFEVERYTHING_SETS.ENABLEDMODS["old_tbat"] then
+    AddPrefabPostInit("tbat_animal_stinkray", function(inst)
+        if not TheWorld.ismastersim then
+            return inst
+        end
+        if inst.components.lootdropper then
+            inst.components.lootdropper:AddChanceLoot("tbat_reef_conch", 1)
+            inst.components.lootdropper:AddChanceLoot("tbat_reef_conch", 1)
+            inst.components.lootdropper:AddChanceLoot("tbat_reef_conch", 1)
+            inst.components.lootdropper:AddChanceLoot("tbat_reef_conch", 0.5)
+            inst.components.lootdropper:AddChanceLoot("tbat_reef_conch", 0.5)
+        end
+    end)
+
+    AddPrefabPostInit("tbat_the_tree_of_all_things_vine_stinkray", function(inst)
+        inst.slot_item = { "tbat_item_crystal_bubble", "tbat_reef_conch" } or {}
+        inst.slot_item_idx = {}
+        for k, temp_prefab in pairs(inst.slot_item) do
+            inst.slot_item_idx[temp_prefab] = k
+        end
+        if not TheWorld.ismastersim then
+            return inst
+        end
+    end)
+end
