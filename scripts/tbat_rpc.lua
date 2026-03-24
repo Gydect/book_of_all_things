@@ -1,3 +1,50 @@
+local DEFAULT_CHAT_NAME_COLOUR = { 118 / 255, 89 / 255, 141 / 255, 1 }
+local DEFAULT_CHAT_MESSAGE_COLOUR = { 1, 1, 1, 1 }
+
+local function FormatChatMessage(message, show_realtime)
+    if message == nil or not show_realtime then
+        return message
+    end
+
+    local ok, timestr = pcall(os.date, "%H:%M:%S")
+    if ok and timestr ~= nil and timestr ~= "" then
+        return string.format("[%s] %s", timestr, message)
+    end
+
+    return message
+end
+
+AddClientModRPCHandler("BOOKOFALLTHINGS", "ChatMessage", function(sender_name, message, icon, iconbg, show_realtime)
+    if ChatHistory == nil or ChatTypes == nil or message == nil then
+        return
+    end
+
+    local colour = {
+        DEFAULT_CHAT_MESSAGE_COLOUR[1],
+        DEFAULT_CHAT_MESSAGE_COLOUR[2],
+        DEFAULT_CHAT_MESSAGE_COLOUR[3],
+        DEFAULT_CHAT_MESSAGE_COLOUR[4],
+    }
+    colour.name_colour = {
+        DEFAULT_CHAT_NAME_COLOUR[1],
+        DEFAULT_CHAT_NAME_COLOUR[2],
+        DEFAULT_CHAT_NAME_COLOUR[3],
+        DEFAULT_CHAT_NAME_COLOUR[4],
+    }
+
+    ChatHistory:AddToHistory(
+        ChatTypes.ChatterMessage,
+        nil,
+        nil,
+        sender_name or "None",
+        FormatChatMessage(message, show_realtime),
+        colour,
+        { icon = icon, iconbg = iconbg },
+        nil,
+        true
+    )
+end)
+
 -- 关闭容器
 AddModRPCHandler("BOOKOFALLTHINGS", "Closecontainer", function(player, container)
     if container.components.container:IsOpenedBy(player) then
@@ -73,7 +120,7 @@ AddModRPCHandler("BOOKOFALLTHINGS", "UsePetWasher", function(player, container, 
         return
     end
 
-    if container.StartTBATWork ~= nil and not container:StartTBATWork() then
+    if container.StartTBATWork ~= nil and not container:StartTBATWork(player) then
         return
     end
 

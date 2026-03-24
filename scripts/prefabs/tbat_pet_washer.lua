@@ -11,6 +11,11 @@ local prefabs =
 }
 
 local WORK_DURATION = 9
+local FINISH_CHAT_MESSAGE = "衣服洗好啦，快来收走吧。"
+-- Foreground icon uses "images/npcchatflairs.xml" with "<icon>.tex".
+local FINISH_CHAT_ICON = "npcchatflair_none"
+-- Background icon uses "images/profileflair.xml" with "<iconbg>.tex".
+local FINISH_CHAT_ICON_BG = "default"
 
 local function isworking(inst)
     return inst.components.container ~= nil and not inst.components.container.canbeopened
@@ -37,16 +42,30 @@ local function stopworking(inst)
         inst.components.container.canbeopened = true
     end
 
+    if TheWorld ~= nil and TheWorld.ismastersim and inst._tbat_working_userid ~= nil then
+        SendModRPCToClient(
+            GetClientModRPC("BOOKOFALLTHINGS", "ChatMessage"),
+            inst._tbat_working_userid,
+            STRINGS.NAMES.TBAT_PET_WASHER or "萌宠洗衣机",
+            FINISH_CHAT_MESSAGE,
+            FINISH_CHAT_ICON,
+            FINISH_CHAT_ICON_BG,
+            true
+        )
+    end
+    inst._tbat_working_userid = nil
+
     inst.AnimState:PlayAnimation("use_pst")
     inst.AnimState:PushAnimation("closed", true)
 end
 
-local function startworking(inst)
+local function startworking(inst, doer)
     if inst.components.container == nil or not inst.components.container.canbeopened then
         return false
     end
 
     inst.components.container.canbeopened = false
+    inst._tbat_working_userid = doer ~= nil and doer.userid or nil
 
     if inst._tbat_worktask ~= nil then
         inst._tbat_worktask:Cancel()
@@ -64,6 +83,7 @@ local function onhammered(inst, worker)
         inst._tbat_worktask:Cancel()
         inst._tbat_worktask = nil
     end
+    inst._tbat_working_userid = nil
     inst.components.lootdropper:DropLoot()
     local fx = SpawnPrefab("collapse_big")
     fx.Transform:SetPosition(inst.Transform:GetWorldPosition())
@@ -102,8 +122,10 @@ local function fn()
     inst.components.container.onclosefn = onclose
     inst.components.container.skipclosesnd = true
     inst.components.container.skipopensnd = true
+    inst.components.container:EnableInfiniteStackSize(true) -- 启用无限堆叠
 
     inst._tbat_worktask = nil
+    inst._tbat_working_userid = nil
     inst.StartTBATWork = startworking
     inst.StopTBATWork = stopworking
 
