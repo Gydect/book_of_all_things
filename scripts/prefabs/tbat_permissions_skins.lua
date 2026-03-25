@@ -22,6 +22,8 @@ for i, v in ipairs(vine_skins) do
             assets = {
                 Asset("ANIM", "anim/tbat_vine_" .. v .. ".zip"),
             },
+            checkfn = BOOKOFALLTHINGS.TbatSkinCheckFn,
+            checkclientfn = BOOKOFALLTHINGS.TbatSkinCheckClientFn,
         }
     )
 end

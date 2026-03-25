@@ -5,6 +5,7 @@ local params = {}
 -- 兼容模组"Show Me (中文)"的容器列表
 local showmeneed = {
     "tbat_spirit_pool",
+    "tbat_pet_washer",
 }
 
 -- ================================
