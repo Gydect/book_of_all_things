@@ -12,7 +12,7 @@ for i, v in ipairs(vine_skins) do
         {
             name = STRINGS.TBAT_STRINGS["TBAT_VINE_" .. string.upper(v) .. "_NAME"],
             des = "None",
-            rarity = "Complimentary",
+            rarity = "Spiffy",
             atlas = "images/tbat_inventoryimages.xml",
             image = "tbat_vine_" .. v,
             build = "tbat_vine_" .. v,

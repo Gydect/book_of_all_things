@@ -475,3 +475,68 @@ AddPrefabPostInit("world", function(inst)
         end
     end
 end)
+
+-------------------------------------------------------------------------------
+-- 兼容旧mod的皮肤面板
+-------------------------------------------------------------------------------
+local ok, Wiki = pcall(require, "widgets/atbook_wikiwidget")
+if not ok then
+    print("加载 Wiki 失败:", Wiki)
+    Wiki = nil
+end
+
+if GLOBAL.BOOKOFEVERYTHING_SETS.ENABLEDMODS["old_tbat"] and Wiki then
+    local CONTENT = require "tbat_wikiwidget_defs"
+    function Wiki:ChangeSkinType()
+        if self.scrollinggrid then
+            self.main:RemoveChild(self.scrollinggrid)
+            self.scrollinggrid:Kill()
+            self.scrollinggrid = nil
+        end
+        if self.detailwidget then
+            self.detail:RemoveChild(self.detailwidget)
+            self.detailwidget:Kill()
+            self.detailwidget = nil
+        end
+
+        local info = {}
+
+        if CONTENT.SKIN[self.typecheck] then
+            for key, value in pairs(CONTENT.SKIN[self.typecheck]) do
+                local t = deepcopy(value)
+                t.index = key
+                t.atlas = value.atlas or TBAT.SKIN.SKINS_DATA_SKINS[t.skincode].atlas
+                t.image = value.image or TBAT.SKIN.SKINS_DATA_SKINS[t.skincode].image
+                t.bank = value.bank or TBAT.SKIN.SKINS_DATA_SKINS[t.skincode].bank
+                t.build = value.build or TBAT.SKIN.SKINS_DATA_SKINS[t.skincode].build
+                t.prefabname = value.prefabname or TBAT.SKIN.SKINS_DATA_SKINS[t.skincode].prefab_name and
+                    STRINGS.NAMES[string.upper(TBAT.SKIN.SKINS_DATA_SKINS[t.skincode].prefab_name)] or ""
+                if t.new_mod then
+                    t.have = false
+                    local uid = ThePlayer and ThePlayer.userid
+                    local skins = auth_caches[uid]
+                    if skins then
+                        for _, name in ipairs(skins) do
+                            if name == t.skincode then
+                                t.have = true
+                                break
+                            end
+                        end
+                    end
+                else
+                    t.have = ThePlayer.replica and ThePlayer.replica.tbat_com_skins_controller and
+                        ThePlayer.replica.tbat_com_skins_controller:HasSkin(t.skincode)
+                end
+                print(">>>", t.skincode, t.have)
+                if t.atlas and t.image then
+                    table.insert(info, t)
+                end
+            end
+        end
+
+        self.scrollinggrid = self.main:AddChild(self:BuildSkinScrollingGrid(info))
+        if self.scrollinggrid then
+            self.scrollinggrid:SetPosition(-175, 0)
+        end
+    end
+end
