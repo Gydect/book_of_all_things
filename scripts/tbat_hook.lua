@@ -460,6 +460,9 @@ end)
 AddComponentPostInit("armor", function(self)
     self.inst:AddTag("tbat_pet_washer_able")
 end)
+AddComponentPostInit("fueled", function(self)
+    self.inst:AddTag("tbat_pet_washer_able")
+end)
 
 local Armor = require("components/armor")
 local _SetCondition = Armor.SetCondition

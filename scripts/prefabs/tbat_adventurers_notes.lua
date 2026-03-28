@@ -35,7 +35,7 @@ local function makenote(index)
         inst:AddComponent("floater")
         inst.components.floater:SetSize("med")
         inst.components.floater:SetVerticalOffset(0.05)
-        inst.components.floater:SetScale({ 0.85, 0.45, 0.85 }) -- 遵照旧mod的参数
+        inst.components.floater:SetScale({ 0.65, 0.45, 0.65 }) -- 遵照旧mod的参数
         inst.components.floater.SwitchToFloatAnim = function(self, ...)
             self.inst.AnimState:PlayAnimation("idle_water")
         end

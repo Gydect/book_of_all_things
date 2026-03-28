@@ -78,7 +78,7 @@ local function ondeploy(inst, pt, deployer, rot)
     end
 end
 
-local FLOATABLE_SCALE = { 1.3, 0.9, 1.3 }
+-- local FLOATABLE_SCALE = { 1.3, 0.9, 1.3 }
 
 local function set_placer(inst)
     local num = inst._placer:value()
@@ -116,7 +116,7 @@ local function itemfn()
 
     -- inst:AddTag()
 
-    MakeInventoryFloatable(inst, "small", .15, FLOATABLE_SCALE)
+    MakeInventoryFloatable(inst, "small", nil, 0)
 
     inst.entity:SetPristine()
 

@@ -164,7 +164,7 @@ local function itemfn()
     inst:AddTag("tbat_rose_goose_egg")
     inst:AddTag("portableitem")
 
-    MakeInventoryFloatable(inst, "small", 0.15)
+    MakeInventoryFloatable(inst, "med", 0.2, { 1.2, 0.8, 1.2 })
 
     inst.entity:SetPristine()
 

@@ -81,6 +81,10 @@ local function add(item, needed_count)
         local now_percent = item.components.armor:GetPercent()
         local new_percent = math.min(3, now_percent + 0.2)
         item.components.armor:SetPercent(new_percent)
+    elseif item.components.fueled then
+        local now_percent = item.components.fueled:GetPercent()
+        local new_percent = math.min(1, now_percent + 0.2)
+        item.components.fueled:SetPercent(new_percent)
     elseif item.prefab == "tbat_material_lavender_laundry_detergent" then
         item.components.stackable:Get(needed_count):Remove()
     end
@@ -95,6 +99,10 @@ local function reduce(item, needed_count)
         local now_percent = item.components.armor:GetPercent()
         local new_percent = math.max(0, now_percent - 0.2)
         item.components.armor:SetPercent(new_percent)
+    elseif item.components.fueled then
+        local now_percent = item.components.fueled:GetPercent()
+        local new_percent = math.max(0, now_percent - 0.2)
+        item.components.fueled:SetPercent(new_percent)
     elseif item.prefab == "tbat_material_lavender_laundry_detergent" then
         item.components.stackable:Get(needed_count):Remove()
     end
